@@ -22,8 +22,10 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
 
     private static final String COMPCACHE_PREF = "pref_compcache";
     
-    private static final String COMPCACHE_PROP = "persist.service.compcache";
-    
+    private static final String COMPCACHE_PERSIST_PROP = "persist.service.compcache";
+
+    private static final String COMPCACHE_DEFAULT = "25";
+
     private static final String JIT_PREF = "pref_jit_mode";
     
     private static final String JIT_ENABLED = "int:jit";
@@ -56,7 +58,7 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
 
     private static final int LOCK_MMS_DEFAULT = 1;
 
-    private CheckBoxPreference mCompcachePref;
+    private ListPreference mCompcachePref;
 
     private CheckBoxPreference mJitPref;
 
@@ -81,9 +83,10 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
         
         PreferenceScreen prefSet = getPreferenceScreen();
         
-        mCompcachePref = (CheckBoxPreference) prefSet.findPreference(COMPCACHE_PREF);
+        mCompcachePref = (ListPreference) prefSet.findPreference(COMPCACHE_PREF);
         if (isSwapAvailable()) {
-            mCompcachePref.setChecked(SystemProperties.getBoolean(COMPCACHE_PROP, false));
+            mCompcachePref.setValue(SystemProperties.get(COMPCACHE_PERSIST_PROP, COMPCACHE_DEFAULT));
+            mCompcachePref.setOnPreferenceChangeListener(this);
         } else {
             prefSet.removePreference(mCompcachePref);
         }
@@ -125,11 +128,6 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
     
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mCompcachePref) {
-            SystemProperties.set(COMPCACHE_PROP, mCompcachePref.isChecked() ? "1" : "0");
-            return true;
-        }
-        
         if (preference == mJitPref) {
             SystemProperties.set(JIT_PERSIST_PROP, 
                     mJitPref.isChecked() ? JIT_ENABLED : JIT_DISABLED);
@@ -161,6 +159,12 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
         if (preference == mHeapsizePref) {
             if (newValue != null) {
                 SystemProperties.set(HEAPSIZE_PERSIST_PROP, (String)newValue);
+                return true;
+            }
+        }
+        if (preference == mCompcachePref) {
+            if (newValue != null) {
+                SystemProperties.set(COMPCACHE_PERSIST_PROP, (String)newValue);
                 return true;
             }
         }
