@@ -99,7 +99,7 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
             mCompcachePref.setValue(SystemProperties.get(COMPCACHE_PERSIST_PROP, COMPCACHE_DEFAULT));
             mCompcachePref.setOnPreferenceChangeListener(this);
 
-            useSwap = SystemProperties.getInt(SWAP_PERSIST_PROP, SWAP_DEFAULT);
+            useSwap = SystemProperties.getInt(SWAP_PERSIST_PROP, Integer.parseInt(SWAP_DEFAULT));
             switch (useSwap) {
                 case -1: prefSet.removePreference(mSwapPref);
                 case  0: mSwapPref.setChecked(false);
