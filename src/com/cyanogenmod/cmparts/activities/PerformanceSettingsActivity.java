@@ -81,6 +81,8 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
     private AlertDialog alertDialog;
 
     private int swapAvailable = -1;
+
+    private int useSwap = 0;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,8 +99,12 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
             mCompcachePref.setValue(SystemProperties.get(COMPCACHE_PERSIST_PROP, COMPCACHE_DEFAULT));
             mCompcachePref.setOnPreferenceChangeListener(this);
 
-            String useSwap = SystemProperties.get(SWAP_PERSIST_PROP, SWAP_DEFAULT);
-            mSwapPref.setChecked("1".equals(useSwap));
+            useSwap = SystemProperties.getInt(SWAP_PERSIST_PROP, SWAP_DEFAULT);
+            switch (useSwap) {
+                case -1: prefSet.removePreference(mSwapPref);
+                case  0: mSwapPref.setChecked(false);
+                default: mSwapPref.setChecked(true);
+            } 
         } else {
             prefSet.removePreference(mCompcachePref);
             prefSet.removePreference(mSwapPref);
@@ -191,7 +197,7 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
         if (preference == mCompcachePref) {
             if (newValue != null) {
                 SystemProperties.set(COMPCACHE_PERSIST_PROP, (String)newValue);
-                if ( ! newValue.equals("0") ) {
+                if ( useSwap > 0 && ! newValue.equals("0") ) {
                     // CompCache is enabled - disable Swap
                     SystemProperties.set(SWAP_PERSIST_PROP, "0");
                     mSwapPref.setChecked(false);
