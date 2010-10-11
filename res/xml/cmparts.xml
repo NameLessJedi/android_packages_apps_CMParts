@@ -25,6 +25,14 @@
             android:targetClass="com.cyanogenmod.cmparts.activities.PerformanceSettingsActivity" />
     </PreferenceScreen>
 
+    <!-- CPU settings -->
+    <PreferenceScreen android:key="cpu_settings"
+        android:title="CPU Settings" android:summary="CPU Clock/Governor settings">
+        <intent android:action="android.intent.action.MAIN"
+            android:targetPackage="com.cyanogenmod.cmparts"
+            android:targetClass="com.cyanogenmod.cmparts.activities.CPUActivity" />
+    </PreferenceScreen>
+
     <!-- Sound settings -->
     <PreferenceScreen android:key="sound_settings"
             android:title="@string/sound_title" android:summary="@string/sound_summary">
