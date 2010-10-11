@@ -68,6 +68,7 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         GovPref = (ListPreference) PrefScreen.findPreference(GOV_PREF);
         GovPref.setEntryValues(Governors);
         GovPref.setEntries(Governors);
+        GovPref.setOnPreferenceChangeListener(this);
 
         FreqMin = PrefScreen.findPreference("freq_min");
         FreqMin.setSummary(MinFreq);
@@ -75,6 +76,7 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         MinFreqPref = (ListPreference) PrefScreen.findPreference(MIN_FREQ_PREF);
         MinFreqPref.setEntryValues(Freqs);
         MinFreqPref.setEntries(Freqs);
+        MinFreqPref.setOnPreferenceChangeListener(this);
 
         FreqMax = PrefScreen.findPreference("freq_max");
         FreqMax.setSummary(MaxFreq);
@@ -82,6 +84,7 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         MaxFreqPref = (ListPreference) PrefScreen.findPreference(MAX_FREQ_PREF);
         MaxFreqPref.setEntryValues(Freqs);
         MaxFreqPref.setEntries(Freqs);
+        MaxFreqPref.setOnPreferenceChangeListener(this);
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
