@@ -330,6 +330,10 @@
     <string name="pref_lock_mms_title">Lock messaging app in memory</string>
     <string name="pref_lock_mms_summary">Avoid lost messages on low memory situations</string>
 
+    <!-- CPU Settings -->
+    <string name="cpu_settings_title">CPU Settings</string>
+
+
     <!-- Backlight -->
     <string name="backlight_title">Automatic backlight</string>
     <string name="backlight_summary">Tweak levels and filtering</string>
