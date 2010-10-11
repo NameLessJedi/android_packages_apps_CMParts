@@ -30,8 +30,8 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
     private static final String MIN_FREQ_PREF = "pref_freq_min";
     private static final String MAX_FREQ_PREF = "pref_freq_max";
     private static final String FREQ_LIST_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies";
-    private static final String FREQ_MAX_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq";
-    private static final String FREQ_MIN_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq";
+    private static final String FREQ_MAX_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq";
+    private static final String FREQ_MIN_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq";
 
     private ListPreference GovPref;
     private ListPreference MinFreqPref;
