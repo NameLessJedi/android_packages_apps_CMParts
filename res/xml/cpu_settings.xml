@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Preference android:key="gov_selected" android:title="Selected CPU Governor" />
+    <Preference android:key="gov_selected" android:title="Selected CPU Governor" 
+                android:selectable="false" />
 
     <ListPreference android:key="pref_cpu_gov" android:dialogTitle="Available governors"
         android:title="Available governors" />
 
-    <Preference android:key="freq_min" android:title="Min CPU frequency" />
+    <Preference android:key="freq_min" android:title="Min CPU frequency" 
+                android:selectable="false" />
 
     <ListPreference android:key="pref_freq_min" android:dialogTitle="Min CPU frequency"
         android:title="Min CPU frequency" android:summary="Minimal CPU frequency" />
 
-    <Preference android:key="freq_max" android:title="Max CPU frequency" />
+    <Preference android:key="freq_max" android:title="Max CPU frequency" 
+                android:selectable="false" />
 
     <ListPreference android:key="pref_freq_max" android:dialogTitle="Max CPU frequency"
         android:title="Max CPU frequency" android:summary="Maximal CPU frequency" />
