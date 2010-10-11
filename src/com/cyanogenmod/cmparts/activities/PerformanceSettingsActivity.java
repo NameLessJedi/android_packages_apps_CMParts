@@ -20,6 +20,8 @@ import java.io.File;
  */
 public class PerformanceSettingsActivity extends PreferenceActivity implements Preference.OnPreferenceChangeListener {
 
+    private static final String CPU_SCREEN = "cpu_settings";
+
     private static final String COMPCACHE_PREF = "pref_compcache";
     
     private static final String COMPCACHE_PERSIST_PROP = "persist.service.compcache";
@@ -64,6 +66,8 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
 
     private static final int LOCK_MMS_DEFAULT = 1;
 
+    private PreferenceScreen mCPUScreen;
+
     private ListPreference mCompcachePref;
 
     private CheckBoxPreference mSwapPref;
@@ -90,6 +94,8 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
         addPreferencesFromResource(R.xml.performance_settings);
         
         PreferenceScreen prefSet = getPreferenceScreen();
+
+        mCPUScreen = (PreferenceScreen) prefSet.findPreference(CPU_SCREEN);
         
         mCompcachePref = (ListPreference) prefSet.findPreference(COMPCACHE_PREF);
         mSwapPref = (CheckBoxPreference) prefSet.findPreference(SWAP_PREF);
@@ -141,6 +147,9 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
     
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mCPUScreen) {
+            startActivity(mCPUScreen.getIntent());
+        }
         if (preference == mSwapPref) {
             boolean checked = mSwapPref.isChecked();
             if (checked) {
