@@ -12,7 +12,6 @@ import android.util.Log;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
-import java.io.InputStreamReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.Process;
@@ -99,7 +98,7 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
 
         if (preference == GovPref) {
             if (newValue != null) {
-                rootcmd = "echo " + (String) newValue + " > " + GOVERNOR;
+                rootcmd = "echo " + (String) newValue + " > " + GOVERNOR + "\n";
                 try {
                     RootInvoker(rootcmd);
                     GovSel.setSummary((String) newValue);
@@ -111,7 +110,7 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         }
         if (preference == MinFreqPref) {
             if (newValue != null) {
-                rootcmd = "echo " + (String) newValue + " > " + FREQ_MIN_FILE;
+                rootcmd = "echo " + (String) newValue + " > " + FREQ_MIN_FILE + "\n";
                 Log.i(LOGTAG, rootcmd);
                 try {
                     RootInvoker(rootcmd);
@@ -124,7 +123,7 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         }
         if (preference == MaxFreqPref) {
             if (newValue != null) {
-                rootcmd = "echo " + (String) newValue + " > " + FREQ_MAX_FILE;
+                rootcmd = "echo " + (String) newValue + " > " + FREQ_MAX_FILE + "\n";
                 try {
                     RootInvoker(rootcmd);
                     FreqMax.setSummary((String) newValue);
@@ -158,15 +157,12 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
 
         Process process;
         BufferedWriter stdin;
-        BufferedReader stdout;
 
         process = new ProcessBuilder("su").start();
         stdin = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()), 512);
-        stdout = new BufferedReader(new InputStreamReader(process.getInputStream()), 512);
         Log.i(LOGTAG, rootCommand);
         stdin.write(rootCommand);
-        stdin.write("\n");
         stdin.close();
+        process.waitFor();
     }
-
 }
