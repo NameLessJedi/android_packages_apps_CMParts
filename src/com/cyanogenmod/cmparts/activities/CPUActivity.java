@@ -2,21 +2,20 @@ package com.cyanogenmod.cmparts.activities;
 
 import com.cyanogenmod.cmparts.R;
 
-// import android.app.AlertDialog;
-// import android.content.DialogInterface;
 import android.os.Bundle;
-// import android.os.SystemProperties;
-// import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
-// import android.provider.Settings;
 import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.io.InputStreamReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.Process;
 
 //
 // CPU Related Settings
@@ -32,6 +31,7 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
     private static final String FREQ_LIST_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies";
     private static final String FREQ_MAX_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq";
     private static final String FREQ_MIN_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq";
+    private static final String LOGTAG = "CPUSettings";
 
     private ListPreference GovPref;
     private ListPreference MinFreqPref;
@@ -39,7 +39,6 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
     private Preference GovSel;
     private Preference FreqMin;
     private Preference FreqMax;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +49,6 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         //
         String[] Governors = ReadOneLine(GOVERNORS_LIST_FILE).split(" ");
         String[] Freqs = ReadOneLine(FREQ_LIST_FILE).split(" ");
-        String MinFreq = ReadOneLine(FREQ_MIN_FILE);
-        String MaxFreq = ReadOneLine(FREQ_MAX_FILE);
-        String Gov = ReadOneLine(GOVERNOR);
 
         //
         // UI
@@ -63,7 +59,7 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         PreferenceScreen PrefScreen = getPreferenceScreen();
 
         GovSel = PrefScreen.findPreference("gov_selected");
-        GovSel.setSummary(Gov);
+        GovSel.setSummary(ReadOneLine(GOVERNOR));
 
         GovPref = (ListPreference) PrefScreen.findPreference(GOV_PREF);
         GovPref.setEntryValues(Governors);
@@ -71,7 +67,7 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         GovPref.setOnPreferenceChangeListener(this);
 
         FreqMin = PrefScreen.findPreference("freq_min");
-        FreqMin.setSummary(MinFreq);
+        FreqMin.setSummary(ReadOneLine(FREQ_MIN_FILE));
 
         MinFreqPref = (ListPreference) PrefScreen.findPreference(MIN_FREQ_PREF);
         MinFreqPref.setEntryValues(Freqs);
@@ -79,7 +75,7 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         MinFreqPref.setOnPreferenceChangeListener(this);
 
         FreqMax = PrefScreen.findPreference("freq_max");
-        FreqMax.setSummary(MaxFreq);
+        FreqMax.setSummary(ReadOneLine(FREQ_MAX_FILE));
 
         MaxFreqPref = (ListPreference) PrefScreen.findPreference(MAX_FREQ_PREF);
         MaxFreqPref.setEntryValues(Freqs);
@@ -87,22 +83,54 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         MaxFreqPref.setOnPreferenceChangeListener(this);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        FreqMax.setSummary(ReadOneLine(FREQ_MAX_FILE));
+        MaxFreqPref.setValue(ReadOneLine(FREQ_MAX_FILE));
+        FreqMin.setSummary(ReadOneLine(FREQ_MIN_FILE));
+        MinFreqPref.setValue(ReadOneLine(FREQ_MIN_FILE));
+    }
+
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+
+        String rootcmd;
+
         if (preference == GovPref) {
             if (newValue != null) {
-                GovSel.setSummary((String) newValue);
+                rootcmd = "echo " + (String) newValue + " > " + GOVERNOR;
+                try {
+                    RootInvoker(rootcmd);
+                    GovSel.setSummary((String) newValue);
+                } catch (IOException e) {
+                    Log.i(LOGTAG, "RootInvoker IOException", e);
+                }
                 return true;
             }
         }
         if (preference == MinFreqPref) {
             if (newValue != null) {
-                FreqMin.setSummary((String) newValue);
+                rootcmd = "echo " + (String) newValue + " > " + FREQ_MIN_FILE;
+                Log.i(LOGTAG, rootcmd);
+                try {
+                    RootInvoker(rootcmd);
+                    FreqMin.setSummary((String) newValue);
+                } catch (IOException e) {
+                    Log.i(LOGTAG, "RootInvoker IOException", e);
+                }
                 return true;
             }
         }
         if (preference == MaxFreqPref) {
             if (newValue != null) {
-                FreqMax.setSummary((String) newValue);
+                rootcmd = "echo " + (String) newValue + " > " + FREQ_MAX_FILE;
+                try {
+                    RootInvoker(rootcmd);
+                    FreqMax.setSummary((String) newValue);
+                } catch (IOException e) {
+                    Log.i(LOGTAG, "RootInvoker IOException", e);
+                }
                 return true;
             }
         }
@@ -121,8 +149,24 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
                 br.close();
             }
         } catch (Exception e) {
-            Log.e("CPUSettings", "IO Exception when reading /sys/ file", e);
+            Log.i(LOGTAG, "IO Exception when reading /sys/ file", e);
         }
         return line;
     }
+
+    private void RootInvoker(String rootCommand) throws IOException {
+
+        Process process;
+        BufferedWriter stdin;
+        BufferedReader stdout;
+
+        process = new ProcessBuilder("su").start();
+        stdin = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()), 512);
+        stdout = new BufferedReader(new InputStreamReader(process.getInputStream()), 512);
+        Log.i(LOGTAG, rootCommand);
+        stdin.write(rootCommand);
+        stdin.write("\n");
+        stdin.close();
+    }
+
 }
