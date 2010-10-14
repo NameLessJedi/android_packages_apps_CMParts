@@ -103,7 +103,7 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
                     RootInvoker(rootcmd);
                     GovSel.setSummary((String) newValue);
                 } catch (IOException e) {
-                    Log.i(LOGTAG, "RootInvoker IOException", e);
+                    Log.e(LOGTAG, "RootInvoker IOException", e);
                 }
                 return true;
             }
@@ -111,12 +111,11 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         if (preference == MinFreqPref) {
             if (newValue != null) {
                 rootcmd = "echo " + (String) newValue + " > " + FREQ_MIN_FILE + "\n";
-                Log.i(LOGTAG, rootcmd);
                 try {
                     RootInvoker(rootcmd);
                     FreqMin.setSummary((String) newValue);
                 } catch (IOException e) {
-                    Log.i(LOGTAG, "RootInvoker IOException", e);
+                    Log.e(LOGTAG, "RootInvoker IOException", e);
                 }
                 return true;
             }
@@ -128,7 +127,7 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
                     RootInvoker(rootcmd);
                     FreqMax.setSummary((String) newValue);
                 } catch (IOException e) {
-                    Log.i(LOGTAG, "RootInvoker IOException", e);
+                    Log.e(LOGTAG, "RootInvoker IOException", e);
                 }
                 return true;
             }
@@ -148,7 +147,7 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
                 br.close();
             }
         } catch (Exception e) {
-            Log.i(LOGTAG, "IO Exception when reading /sys/ file", e);
+            Log.e(LOGTAG, "IO Exception when reading /sys/ file", e);
         }
         return line;
     }
@@ -160,9 +159,12 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
 
         process = new ProcessBuilder("su").start();
         stdin = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()), 512);
-        Log.i(LOGTAG, rootCommand);
         stdin.write(rootCommand);
         stdin.close();
-        process.waitFor();
+        try {
+            process.waitFor();
+        } catch (InterruptedException e) {
+            Log.e(LOGTAG,"Interrupted on waitFor()", e);
+        }
     }
 }
