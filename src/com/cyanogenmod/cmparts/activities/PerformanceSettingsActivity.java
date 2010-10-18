@@ -66,15 +66,11 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
 
     private static final int LOCK_MMS_DEFAULT = 1;
 
-<<<<<<< HEAD
     private PreferenceScreen mCPUScreen;
 
     private ListPreference mCompcachePref;
 
     private CheckBoxPreference mSwapPref;
-=======
-    private ListPreference mCompcachePref;
->>>>>>> b3d587bc799062f97aa467d4b0ec73b9848f6c1d
 
     private CheckBoxPreference mJitPref;
 
@@ -90,12 +86,8 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
 
     private int swapAvailable = -1;
 
-<<<<<<< HEAD
     private int useSwap = 0;
     
-=======
-
->>>>>>> b3d587bc799062f97aa467d4b0ec73b9848f6c1d
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,7 +96,6 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
         addPreferencesFromResource(R.xml.performance_settings);
 
         PreferenceScreen prefSet = getPreferenceScreen();
-<<<<<<< HEAD
 
         mCPUScreen = (PreferenceScreen) prefSet.findPreference(CPU_SCREEN);
         
@@ -120,14 +111,6 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
                 case  0: mSwapPref.setChecked(false);
                 default: mSwapPref.setChecked(true);
             } 
-=======
-        mCompcachePref = (ListPreference) prefSet.findPreference(COMPCACHE_PREF);
-        if (isSwapAvailable()) {
-	    if (SystemProperties.get(COMPCACHE_PERSIST_PROP) == "1")
-                SystemProperties.set(COMPCACHE_PERSIST_PROP, COMPCACHE_DEFAULT);
-            mCompcachePref.setValue(SystemProperties.get(COMPCACHE_PERSIST_PROP, COMPCACHE_DEFAULT));
-            mCompcachePref.setOnPreferenceChangeListener(this);
->>>>>>> b3d587bc799062f97aa467d4b0ec73b9848f6c1d
         } else {
             prefSet.removePreference(mCompcachePref);
             prefSet.removePreference(mSwapPref);
@@ -169,7 +152,6 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
     }
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-<<<<<<< HEAD
         if (preference == mCPUScreen) {
             startActivity(mCPUScreen.getIntent());
         }
@@ -188,10 +170,6 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
         }
         if (preference == mJitPref) {
             SystemProperties.set(JIT_PERSIST_PROP, 
-=======
-	if (preference == mJitPref) {
-            SystemProperties.set(JIT_PERSIST_PROP,
->>>>>>> b3d587bc799062f97aa467d4b0ec73b9848f6c1d
                     mJitPref.isChecked() ? JIT_ENABLED : JIT_DISABLED);
             return true;
         }
@@ -224,7 +202,6 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
                 return true;
             }
         }
-<<<<<<< HEAD
         if (preference == mCompcachePref) {
             if (newValue != null) {
                 SystemProperties.set(COMPCACHE_PERSIST_PROP, (String)newValue);
@@ -236,16 +213,6 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
                 return true;
             }
         }
-=======
-
-        if (preference == mCompcachePref) {
-            if (newValue != null) {
-                SystemProperties.set(COMPCACHE_PERSIST_PROP, (String)newValue);
-                return true;
-	    }
-        }
-
->>>>>>> b3d587bc799062f97aa467d4b0ec73b9848f6c1d
         return false;
     }
 
