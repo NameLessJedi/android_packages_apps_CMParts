@@ -35,28 +35,28 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
     private static final int SWAP_DEFAULT = 0;
 
     private static final String JIT_PREF = "pref_jit_mode";
-    
+
     private static final String JIT_ENABLED = "int:jit";
-    
+
     private static final String JIT_DISABLED = "int:fast";
-    
+
     private static final String JIT_PERSIST_PROP = "persist.sys.jit-mode";
-    
+
     private static final String JIT_PROP = "dalvik.vm.execution-mode";
-    
+
     private static final String HEAPSIZE_PREF = "pref_heapsize";
-    
+
     private static final String HEAPSIZE_PROP = "dalvik.vm.heapsize";
-    
+
     private static final String HEAPSIZE_PERSIST_PROP = "persist.sys.vm.heapsize";
-    
+
     private static final String HEAPSIZE_DEFAULT = "16m";
-    
+
     private static final String USE_DITHERING_PREF = "pref_use_dithering";
-    
+
     private static final String USE_DITHERING_PERSIST_PROP = "persist.sys.use_dithering";
     
-    private static final String USE_DITHERING_DEFAULT = "1";
+    private static final String USE_DITHERING_DEFAULT = "0";
 
     private static final String LOCK_HOME_PREF = "pref_lock_home";
 
@@ -66,11 +66,15 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
 
     private static final int LOCK_MMS_DEFAULT = 1;
 
+<<<<<<< HEAD
     private PreferenceScreen mCPUScreen;
 
     private ListPreference mCompcachePref;
 
     private CheckBoxPreference mSwapPref;
+=======
+    private ListPreference mCompcachePref;
+>>>>>>> b3d587bc799062f97aa467d4b0ec73b9848f6c1d
 
     private CheckBoxPreference mJitPref;
 
@@ -86,16 +90,21 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
 
     private int swapAvailable = -1;
 
+<<<<<<< HEAD
     private int useSwap = 0;
     
+=======
+
+>>>>>>> b3d587bc799062f97aa467d4b0ec73b9848f6c1d
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         setTitle(R.string.performance_settings_title);
         addPreferencesFromResource(R.xml.performance_settings);
-        
+
         PreferenceScreen prefSet = getPreferenceScreen();
+<<<<<<< HEAD
 
         mCPUScreen = (PreferenceScreen) prefSet.findPreference(CPU_SCREEN);
         
@@ -111,6 +120,14 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
                 case  0: mSwapPref.setChecked(false);
                 default: mSwapPref.setChecked(true);
             } 
+=======
+        mCompcachePref = (ListPreference) prefSet.findPreference(COMPCACHE_PREF);
+        if (isSwapAvailable()) {
+	    if (SystemProperties.get(COMPCACHE_PERSIST_PROP) == "1")
+                SystemProperties.set(COMPCACHE_PERSIST_PROP, COMPCACHE_DEFAULT);
+            mCompcachePref.setValue(SystemProperties.get(COMPCACHE_PERSIST_PROP, COMPCACHE_DEFAULT));
+            mCompcachePref.setOnPreferenceChangeListener(this);
+>>>>>>> b3d587bc799062f97aa467d4b0ec73b9848f6c1d
         } else {
             prefSet.removePreference(mCompcachePref);
             prefSet.removePreference(mSwapPref);
@@ -120,13 +137,13 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
         String jitMode = SystemProperties.get(JIT_PERSIST_PROP,
                 SystemProperties.get(JIT_PROP, JIT_ENABLED));
         mJitPref.setChecked(JIT_ENABLED.equals(jitMode));
-        
+
         mUseDitheringPref = (CheckBoxPreference) prefSet.findPreference(USE_DITHERING_PREF);
         String useDithering = SystemProperties.get(USE_DITHERING_PERSIST_PROP, USE_DITHERING_DEFAULT);
         mUseDitheringPref.setChecked("1".equals(useDithering));
-        
+
         mHeapsizePref = (ListPreference) prefSet.findPreference(HEAPSIZE_PREF);
-        mHeapsizePref.setValue(SystemProperties.get(HEAPSIZE_PERSIST_PROP, 
+        mHeapsizePref.setValue(SystemProperties.get(HEAPSIZE_PERSIST_PROP,
                 SystemProperties.get(HEAPSIZE_PROP, HEAPSIZE_DEFAULT)));
         mHeapsizePref.setOnPreferenceChangeListener(this);
 
@@ -147,12 +164,12 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
                 return;
             }
         });
-        
+
         alertDialog.show();
     }
-    
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+<<<<<<< HEAD
         if (preference == mCPUScreen) {
             startActivity(mCPUScreen.getIntent());
         }
@@ -171,10 +188,14 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
         }
         if (preference == mJitPref) {
             SystemProperties.set(JIT_PERSIST_PROP, 
+=======
+	if (preference == mJitPref) {
+            SystemProperties.set(JIT_PERSIST_PROP,
+>>>>>>> b3d587bc799062f97aa467d4b0ec73b9848f6c1d
                     mJitPref.isChecked() ? JIT_ENABLED : JIT_DISABLED);
             return true;
         }
-        
+
         if (preference == mUseDitheringPref) {
             SystemProperties.set(USE_DITHERING_PERSIST_PROP,
                     mUseDitheringPref.isChecked() ? "1" : "0");
@@ -203,6 +224,7 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
                 return true;
             }
         }
+<<<<<<< HEAD
         if (preference == mCompcachePref) {
             if (newValue != null) {
                 SystemProperties.set(COMPCACHE_PERSIST_PROP, (String)newValue);
@@ -214,6 +236,16 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
                 return true;
             }
         }
+=======
+
+        if (preference == mCompcachePref) {
+            if (newValue != null) {
+                SystemProperties.set(COMPCACHE_PERSIST_PROP, (String)newValue);
+                return true;
+	    }
+        }
+
+>>>>>>> b3d587bc799062f97aa467d4b0ec73b9848f6c1d
         return false;
     }
 

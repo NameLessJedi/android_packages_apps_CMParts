@@ -57,6 +57,9 @@
     <string name="title_show_dbm">Show dBm</string>
     <string name="summary_on_show_dbm">Signal strength in dBm displayed in the status bar</string>
     <string name="summary_off_show_dbm">Signal strength in dBm displayed in the status bar</string>
+    <string name="title_hide_signal_dbm">Hide signal strength</string>
+    <string name="summary_on_hide_signal_dbm">Signal strength icon is disabled only dBm will show</string>
+    <string name="summary_off_hide_signal_dbm">Signal strength icon is enabled</string>
     <string name="title_dbm_color">dBm color</string>
 
     <!-- Date and Provider -->
@@ -134,6 +137,17 @@
     <string name="pref_trackball_reset_summary">Reset all colors and apps</string>
     <string name="dialog_trackball_loading">Loading...</string>
     <string name="dialog_trackball_packagelist">Loading Package List</string>
+    <string name="trackball_category_dialog_text">Please enter a new category</string>
+    <string name="trackball_category_list_title">Category</string>
+    <string name="trackball_category_list_summary">Choose a category</string>
+    <string name="trackball_category_screen">Manage Categories</string>
+    <string name="trackball_category_add_title">Add category</string>
+    <string name="trackball_category_add_summary">Add a category to the list</string>
+    <string name="trackball_category_remove_title">Remove category</string>
+    <string name="trackball_category_remove_summary">Remove a category from the list</string>
+    <string name="trackball_remove_default_toast">Can\'t remove this category as its the default one.</string>
+    <string name="trackball_reset_all">Reset all colors and categories.</string>
+    <string name="trackball_array_error">Unfortunately there was an array error. This package has been forced into Miscellaneous category.</string>
 
     <!-- Trackball Settings : Warning dialog -->
     <string name="notification_battery_warning_title">WARNING: May Cause Battery Drain</string>
@@ -181,6 +195,8 @@
     <string name="pref_trackball_unlock_summary">Pressing the trackball unlocks the device</string>
     <string name="pref_menu_unlock_title">Menu unlock</string>
     <string name="pref_menu_unlock_summary">Pressing the menu button unlocks the device</string>
+    <string name="pref_lockscreen_quick_unlock_control_title">Quick Unlock</string>
+    <string name="pref_lockscreen_quick_unlock_control_summary">No need to press OK when entering Pin or Password. Delete counts as bad try.</string>
 
 
     <!-- Long Press Home -->
@@ -322,6 +338,36 @@
     <string name="summary_not_exp_bar_color_mask">Pick a color to apply to elements of the pulldown notification bar</string>
 
 
+    <!-- Expanded View Power Widget -->
+    <string name="title_widget_buttons">Expanded View Widget</string>
+    <string name="title_expanded_widget">Notification power widget</string>
+    <string name="summary_expanded_widget">Use the expanded views power widget</string>
+    <string name="expanded_color_mask">Indicator color</string>
+    <string name="title_widget_picker">Widget buttons</string>
+    <string name="summary_widget_picker">Pick your widget buttons</string>
+    <string name="title_toggle_wifi">Toggle Wifi</string>
+    <string name="title_toggle_bluetooth">Toggle Bluetooth</string>
+    <string name="title_toggle_gps">Toggle GPS</string>
+    <string name="title_toggle_sound">Toggle Sound</string>
+    <string name="title_toggle_brightness">Toggle Brightness</string>
+    <string name="title_toggle_sync">Toggle Sync</string>
+    <string name="title_toggle_wifiap">Toggle Wifi AP</string>
+    <string name="title_toggle_screentimeout">Toggle Screentimeout</string>
+    <string name="title_toggle_mobiledata">Toggle Mobiledata</string>
+    <string name="title_toggle_lockscreen">Toggle Lockscreen</string>
+    <string name="title_toggle_networkmode">Toggle 2G/3G</string>
+    <string name="title_toggle_autorotate">Toggle Orientation</string>
+    <string name="title_toggle_airplane">Toggle Airplane mode</string>
+    <string name="title_button_modes">Button modes</string>
+    <string name="pref_brightness_mode_title">Brightness modes</string>
+    <string name="pref_brightness_mode_summary">Choose how the brightness button changes modes</string>
+    <string name="pref_network_mode_title">Network modes</string>
+    <string name="pref_network_mode_summary">Choose how the NetworkMode button changes modes</string>
+    <string name="pref_screentimeout_mode_title">Screentimeout modes</string>
+    <string name="pref_screentimeout_mode_summary">Choose how the Screentimeout button changes modes</string>
+    <string name="pref_ring_mode_title">Sound modes</string>
+    <string name="pref_ring_mode_summary">Choose how the sound button changes modes</string>
+
     <!-- Performance : Lock home memory -->
     <string name="pref_lock_home_title">Lock home in memory</string>
     <string name="pref_lock_home_summary">Attempt to keep the current home app in memory at all times</string>
@@ -411,4 +457,5 @@
     <string name="quiet_hours_dim">Dim LED</string>
     <string name="quiet_hours_dim_on">LED will dim if possible</string>
     <string name="quiet_hours_dim_off">LED will be full brightness</string>
+
 </resources>
