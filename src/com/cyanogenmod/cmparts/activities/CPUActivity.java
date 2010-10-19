@@ -47,7 +47,13 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         // Read data from kernel
         //
         String[] Governors = ReadOneLine(GOVERNORS_LIST_FILE).split(" ");
-        String[] Freqs = ReadOneLine(FREQ_LIST_FILE).split(" ");
+        String[] FreqValues = ReadOneLine(FREQ_LIST_FILE).split(" ");
+        String[] Freqs;
+
+        Freqs = new String[FreqValues.length];
+        for(int i=0; i <Freqs.length; i++) {
+            Freqs[i] = MHerzed(FreqValues[i]);
+        }
 
         //
         // UI
@@ -66,18 +72,18 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         GovPref.setOnPreferenceChangeListener(this);
 
         FreqMin = PrefScreen.findPreference("freq_min");
-        FreqMin.setSummary(ReadOneLine(FREQ_MIN_FILE));
+        FreqMin.setSummary(MHerzed(ReadOneLine(FREQ_MIN_FILE)));
 
         MinFreqPref = (ListPreference) PrefScreen.findPreference(MIN_FREQ_PREF);
-        MinFreqPref.setEntryValues(Freqs);
+        MinFreqPref.setEntryValues(FreqValues);
         MinFreqPref.setEntries(Freqs);
         MinFreqPref.setOnPreferenceChangeListener(this);
 
         FreqMax = PrefScreen.findPreference("freq_max");
-        FreqMax.setSummary(ReadOneLine(FREQ_MAX_FILE));
+        FreqMax.setSummary(MHerzed(ReadOneLine(FREQ_MAX_FILE)));
 
         MaxFreqPref = (ListPreference) PrefScreen.findPreference(MAX_FREQ_PREF);
-        MaxFreqPref.setEntryValues(Freqs);
+        MaxFreqPref.setEntryValues(FreqValues);
         MaxFreqPref.setEntries(Freqs);
         MaxFreqPref.setOnPreferenceChangeListener(this);
     }
@@ -86,53 +92,41 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
     public void onResume() {
         super.onResume();
 
-        FreqMax.setSummary(ReadOneLine(FREQ_MAX_FILE));
-        MaxFreqPref.setValue(ReadOneLine(FREQ_MAX_FILE));
-        FreqMin.setSummary(ReadOneLine(FREQ_MIN_FILE));
-        MinFreqPref.setValue(ReadOneLine(FREQ_MIN_FILE));
+        FreqMax.setSummary(MHerzed(ReadOneLine(FREQ_MAX_FILE)));
+        MaxFreqPref.setValue(MHerzed(ReadOneLine(FREQ_MAX_FILE)));
+        FreqMin.setSummary(MHerzed(ReadOneLine(FREQ_MIN_FILE)));
+        MinFreqPref.setValue(MHerzed(ReadOneLine(FREQ_MIN_FILE)));
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
 
-        String rootcmd;
+        String rootcmd = null;
+        String filename;
 
-        if (preference == GovPref) {
-            if (newValue != null) {
+        if (newValue != null) {
+            if (preference == GovPref) {
                 rootcmd = "echo " + (String) newValue + " > " + GOVERNOR + "\n";
-                try {
-                    RootInvoker(rootcmd);
-                    GovSel.setSummary((String) newValue);
-                } catch (IOException e) {
-                    Log.e(LOGTAG, "RootInvoker IOException", e);
-                }
-                return true;
-            }
-        }
-        if (preference == MinFreqPref) {
-            if (newValue != null) {
+            } else if (preference == MinFreqPref) {
                 rootcmd = "echo " + (String) newValue + " > " + FREQ_MIN_FILE + "\n";
-                try {
-                    RootInvoker(rootcmd);
-                    FreqMin.setSummary((String) newValue);
-                } catch (IOException e) {
-                    Log.e(LOGTAG, "RootInvoker IOException", e);
-                }
-                return true;
-            }
-        }
-        if (preference == MaxFreqPref) {
-            if (newValue != null) {
+            } else if (preference == MaxFreqPref) {
                 rootcmd = "echo " + (String) newValue + " > " + FREQ_MAX_FILE + "\n";
-                try {
-                    RootInvoker(rootcmd);
-                    FreqMax.setSummary((String) newValue);
-                } catch (IOException e) {
-                    Log.e(LOGTAG, "RootInvoker IOException", e);
-                }
-                return true;
             }
+            try {
+                RootInvoker(rootcmd);
+                if (preference == GovPref) {
+                    GovSel.setSummary((String) newValue);
+                } else if (preference == MinFreqPref) {
+                    FreqMin.setSummary(MHerzed((String) newValue));
+                } else if (preference == MaxFreqPref) {
+                    FreqMax.setSummary(MHerzed((String) newValue));
+                }
+            } catch (IOException e) {
+                Log.e(LOGTAG, "RootInvoker Exception", e);
+            }
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     private String ReadOneLine(String fname) {
@@ -157,14 +151,24 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         Process process;
         BufferedWriter stdin;
 
-        process = new ProcessBuilder("su").start();
-        stdin = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()), 512);
-        stdin.write(rootCommand);
-        stdin.close();
-        try {
-            process.waitFor();
-        } catch (InterruptedException e) {
-            Log.e(LOGTAG,"Interrupted on waitFor()", e);
+        if (rootCommand != null) {
+            process = new ProcessBuilder("su").start();
+            stdin = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()), 512);
+            stdin.write(rootCommand);
+            stdin.close();
+            try {
+                process.waitFor();
+            } catch (InterruptedException e) {
+                Log.e(LOGTAG,"Interrupted on waitFor()", e);
+            }
         }
+    }
+
+    private String MHerzed(String str) {
+        String temp;
+
+        temp = str.substring(0, str.length() - 3);
+
+        return (temp + " MHz");
     }
 }
