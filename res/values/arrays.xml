@@ -166,16 +166,16 @@
 
     <string-array name="pref_compcache_size_entries">
         <item>Disabled</item>
-        <item>15% of total RAM</item>
-        <item>25% (default)</item>
-        <item>35%</item>
+        <item>10%</item>
+        <item>18% (default)</item>
+        <item>26%</item>
     </string-array>
 
     <string-array name="pref_compcache_size_values" translatable="false">
         <item>0</item>
-        <item>15</item>
-        <item>25</item>
-        <item>35</item>
+        <item>10</item>
+        <item>18</item>
+        <item>26</item>
     </string-array>
 
     <string-array name="entries_light_filter_window">
@@ -380,6 +380,16 @@
         <item>2</item>
         <item>3</item>
         <item>4</item>
+    </string-array>
+
+    <string-array name="entries_flash_widget" translatable="false">
+        <item>Normal</item>
+        <item>High / Death Ray</item>
+    </string-array>
+
+    <string-array name="values_flash_widget" translatable="false">
+        <item>0</item>
+        <item>1</item>
     </string-array>
 
 </resources>

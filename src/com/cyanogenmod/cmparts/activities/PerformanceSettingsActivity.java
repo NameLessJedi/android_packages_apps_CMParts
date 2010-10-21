@@ -26,7 +26,7 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
     
     private static final String COMPCACHE_PERSIST_PROP = "persist.service.compcache";
 
-    private static final String COMPCACHE_DEFAULT = "25";
+    private static final String COMPCACHE_DEFAULT = SystemProperties.get("ro.compcache.default");
 
     private static final String SWAP_PERSIST_PROP = "persist.sys.swap";
 
