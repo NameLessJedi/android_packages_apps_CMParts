@@ -108,7 +108,9 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
             useSwap = SystemProperties.getInt(SWAP_PERSIST_PROP, SWAP_DEFAULT);
             switch (useSwap) {
                 case -1: prefSet.removePreference(mSwapPref);
+                         break;
                 case  0: mSwapPref.setChecked(false);
+                         break;
                 default: mSwapPref.setChecked(true);
             } 
         } else {
