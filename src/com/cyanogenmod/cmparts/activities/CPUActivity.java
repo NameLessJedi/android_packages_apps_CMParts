@@ -43,12 +43,10 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //
-        // Read data from kernel
-        //
         String[] Governors = ReadOneLine(GOVERNORS_LIST_FILE).split(" ");
         String[] FreqValues = ReadOneLine(FREQ_LIST_FILE).split(" ");
         String[] Freqs;
+        String temp;
 
         Freqs = new String[FreqValues.length];
         for(int i=0; i <Freqs.length; i++) {
@@ -64,27 +62,33 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         PreferenceScreen PrefScreen = getPreferenceScreen();
 
         GovSel = PrefScreen.findPreference("gov_selected");
-        GovSel.setSummary(ReadOneLine(GOVERNOR));
+        temp = ReadOneLine(GOVERNOR);
+        GovSel.setSummary(temp);
 
         GovPref = (ListPreference) PrefScreen.findPreference(GOV_PREF);
         GovPref.setEntryValues(Governors);
         GovPref.setEntries(Governors);
+        GovPref.setValue(temp);
         GovPref.setOnPreferenceChangeListener(this);
 
         FreqMin = PrefScreen.findPreference("freq_min");
-        FreqMin.setSummary(MHerzed(ReadOneLine(FREQ_MIN_FILE)));
+        temp = ReadOneLine(FREQ_MIN_FILE);
+        FreqMin.setSummary(MHerzed(temp));
 
         MinFreqPref = (ListPreference) PrefScreen.findPreference(MIN_FREQ_PREF);
         MinFreqPref.setEntryValues(FreqValues);
         MinFreqPref.setEntries(Freqs);
+        MinFreqPref.setValue(temp);
         MinFreqPref.setOnPreferenceChangeListener(this);
 
         FreqMax = PrefScreen.findPreference("freq_max");
-        FreqMax.setSummary(MHerzed(ReadOneLine(FREQ_MAX_FILE)));
+        temp = ReadOneLine(FREQ_MAX_FILE);
+        FreqMax.setSummary(MHerzed(temp));
 
         MaxFreqPref = (ListPreference) PrefScreen.findPreference(MAX_FREQ_PREF);
         MaxFreqPref.setEntryValues(FreqValues);
         MaxFreqPref.setEntries(Freqs);
+        MaxFreqPref.setValue(temp);
         MaxFreqPref.setOnPreferenceChangeListener(this);
     }
 
