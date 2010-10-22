@@ -32,7 +32,7 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
 
     private static final String SWAP_PREF = "pref_swap";
 
-    private static final int SWAP_DEFAULT = 0;
+    private static final int SWAP_DEFAULT = SystemProperties.getInt("ro.swap.default", -1);
 
     private static final String JIT_PREF = "pref_jit_mode";
 
