@@ -430,7 +430,5 @@
     <string name="pref_ring_mode_title">Режимы звука</string>
     <string name="pref_ring_mode_summary">Укажите какие режимы будут меняться кнопкой Звук</string>
 	
-    <string name="cmstats_title">Анонимная статистика</string>
-    <string name="cmstats_summary">Помогите сделать CM лучше, включите отправку анонимных отчётов</string>
     
 </resources>
