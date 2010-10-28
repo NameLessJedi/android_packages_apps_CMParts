@@ -94,12 +94,20 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
 
     @Override
     public void onResume() {
+        String temp;
+
         super.onResume();
 
-        FreqMax.setSummary(MHerzed(ReadOneLine(FREQ_MAX_FILE)));
-        MaxFreqPref.setValue(ReadOneLine(FREQ_MAX_FILE));
-        FreqMin.setSummary(MHerzed(ReadOneLine(FREQ_MIN_FILE)));
-        MinFreqPref.setValue(ReadOneLine(FREQ_MIN_FILE));
+        temp = ReadOneLine(FREQ_MAX_FILE);
+        FreqMax.setSummary(MHerzed(temp));
+        MaxFreqPref.setValue(temp);
+
+        temp = ReadOneLine(FREQ_MIN_FILE);
+        FreqMin.setSummary(MHerzed(temp));
+        MinFreqPref.setValue(temp);
+
+        temp = ReadOneLine(GOVERNOR);
+        GovSel.setSummary(temp);
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
