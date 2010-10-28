@@ -31,13 +31,13 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
     private static final String FREQ_MAX_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq";
     private static final String FREQ_MIN_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq";
     private static final String LOGTAG = "CPUSettings";
+    private String GOV_FMT = "List of available governors\nCurrently selected: %S";
+    private String MIN_FMT = "Minimum CPU frequency\nCurrently: %s";
+    private String MAX_FMT = "Maximum CPU frequency\nCurrently: %s";
 
     private ListPreference GovPref;
     private ListPreference MinFreqPref;
     private ListPreference MaxFreqPref;
-    private Preference GovSel;
-    private Preference FreqMin;
-    private Preference FreqMax;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,34 +61,31 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         
         PreferenceScreen PrefScreen = getPreferenceScreen();
 
-        GovSel = PrefScreen.findPreference("gov_selected");
         temp = ReadOneLine(GOVERNOR);
-        GovSel.setSummary(temp);
 
         GovPref = (ListPreference) PrefScreen.findPreference(GOV_PREF);
         GovPref.setEntryValues(Governors);
         GovPref.setEntries(Governors);
         GovPref.setValue(temp);
+        GovPref.setSummary(String.format(GOV_FMT, temp));
         GovPref.setOnPreferenceChangeListener(this);
 
-        FreqMin = PrefScreen.findPreference("freq_min");
         temp = ReadOneLine(FREQ_MIN_FILE);
-        FreqMin.setSummary(MHerzed(temp));
 
         MinFreqPref = (ListPreference) PrefScreen.findPreference(MIN_FREQ_PREF);
         MinFreqPref.setEntryValues(FreqValues);
         MinFreqPref.setEntries(Freqs);
         MinFreqPref.setValue(temp);
+        MinFreqPref.setSummary(String.format(MIN_FMT, MHerzed(temp)));
         MinFreqPref.setOnPreferenceChangeListener(this);
 
-        FreqMax = PrefScreen.findPreference("freq_max");
         temp = ReadOneLine(FREQ_MAX_FILE);
-        FreqMax.setSummary(MHerzed(temp));
 
         MaxFreqPref = (ListPreference) PrefScreen.findPreference(MAX_FREQ_PREF);
         MaxFreqPref.setEntryValues(FreqValues);
         MaxFreqPref.setEntries(Freqs);
         MaxFreqPref.setValue(temp);
+        MaxFreqPref.setSummary(String.format(MAX_FMT, MHerzed(temp)));
         MaxFreqPref.setOnPreferenceChangeListener(this);
     }
 
@@ -99,15 +96,15 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         super.onResume();
 
         temp = ReadOneLine(FREQ_MAX_FILE);
-        FreqMax.setSummary(MHerzed(temp));
         MaxFreqPref.setValue(temp);
+        MaxFreqPref.setSummary(String.format(MAX_FMT, MHerzed(temp)));
 
         temp = ReadOneLine(FREQ_MIN_FILE);
-        FreqMin.setSummary(MHerzed(temp));
         MinFreqPref.setValue(temp);
+        MinFreqPref.setSummary(String.format(MIN_FMT, MHerzed(temp)));
 
         temp = ReadOneLine(GOVERNOR);
-        GovSel.setSummary(temp);
+        GovPref.setSummary(String.format(GOV_FMT, temp));
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -126,11 +123,11 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
             try {
                 RootInvoker(rootcmd);
                 if (preference == GovPref) {
-                    GovSel.setSummary((String) newValue);
+                    GovPref.setSummary(String.format(GOV_FMT, (String) newValue));
                 } else if (preference == MinFreqPref) {
-                    FreqMin.setSummary(MHerzed((String) newValue));
+                    MinFreqPref.setSummary(String.format(MIN_FMT, MHerzed((String) newValue)));
                 } else if (preference == MaxFreqPref) {
-                    FreqMax.setSummary(MHerzed((String) newValue));
+                    MaxFreqPref.setSummary(String.format(MAX_FMT, MHerzed((String) newValue)));
                 }
             } catch (IOException e) {
                 Log.e(LOGTAG, "RootInvoker Exception", e);
