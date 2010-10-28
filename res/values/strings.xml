@@ -464,4 +464,10 @@
     <string name="quiet_hours_dim_on">LED will dim if possible</string>
     <string name="quiet_hours_dim_off">LED will be full brightness</string>
 
+    <!-- CPU Settings -->
+    <string name="cpu_title">CPU Settings</string>
+    <string name="cpu_governors_list">List of available governors\nCurrently selected: %S</string>
+    <string name="cpu_min_freq">Minimum CPU frequency\nCurrently: %s</string>
+    <string name="cpu_max_freq">Maximum CPU frequency\nCurrently: %s</string>
+
 </resources>

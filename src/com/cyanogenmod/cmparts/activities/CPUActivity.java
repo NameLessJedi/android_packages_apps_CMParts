@@ -31,9 +31,9 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
     private static final String FREQ_MAX_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq";
     private static final String FREQ_MIN_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq";
     private static final String LOGTAG = "CPUSettings";
-    private String GOV_FMT = "List of available governors\nCurrently selected: %S";
-    private String MIN_FMT = "Minimum CPU frequency\nCurrently: %s";
-    private String MAX_FMT = "Maximum CPU frequency\nCurrently: %s";
+    private String GOV_FMT;
+    private String MIN_FMT;
+    private String MAX_FMT;
 
     private ListPreference GovPref;
     private ListPreference MinFreqPref;
@@ -42,6 +42,10 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        GOV_FMT = getString(R.string.cpu_governors_list);
+        MIN_FMT = getString(R.string.cpu_min_freq);
+        MAX_FMT = getString(R.string.cpu_max_freq);
 
         String[] Governors = ReadOneLine(GOVERNORS_LIST_FILE).split(" ");
         String[] FreqValues = ReadOneLine(FREQ_LIST_FILE).split(" ");
@@ -56,7 +60,7 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         //
         // UI
         //
-        setTitle("CPU Settings");
+        setTitle(R.string.cpu_title);
         addPreferencesFromResource(R.xml.cpu_settings);
         
         PreferenceScreen PrefScreen = getPreferenceScreen();
