@@ -3,6 +3,9 @@
 
     <CheckBoxPreference android:key="pref_move_all_apps"
         android:title="@string/pref_move_all_apps_title" android:summary="@string/pref_move_all_apps_summary" />
+    
+    <CheckBoxPreference android:key="pref_enable_dex2sd"
+        android:title="@string/pref_enable_dex2sd_title" android:summary="@string/pref_enable_dex2sd_summary" />
 
     <ListPreference android:key="pref_install_location" android:dialogTitle="@string/pref_install_location_title"
         android:title="@string/pref_install_location_title" android:summary="@string/pref_install_location_summary"

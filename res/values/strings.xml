@@ -247,6 +247,10 @@
     <string name="pref_move_all_apps_title">Allow application moving</string>
     <string name="pref_move_all_apps_summary">Allow moving of any application to external storage</string>
 
+    <!-- Application Settings : enable dex2sd -->
+    <string name="pref_enable_dex2sd_title">Enable dex2sd</string>
+    <string name="pref_enable_dex2sd_summary">Push dalvik-cache from internal to SD card; (requires restart)</string>
+
     <!-- Application Settings : Install Location -->
     <string name="pref_install_location_title">Install location</string>
     <string name="pref_install_location_summary">Select where new applications should be installed</string>
