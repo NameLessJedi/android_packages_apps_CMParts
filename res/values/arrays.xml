@@ -34,12 +34,14 @@
         <item>Automatic</item>
         <item>Internal</item>
         <item>External</item>
+        <item>SD Ext</item>
     </string-array>
 
     <string-array name="values_install_location">
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
     </string-array>
 
     <string-array name="entries_render_effect">
