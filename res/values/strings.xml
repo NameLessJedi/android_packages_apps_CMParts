@@ -23,6 +23,12 @@
     <string name="pref_pinch_reflow_title">Reflow after pinch in</string>
     <string name="pref_pinch_reflow_summary">Reflow content immediately after pinch to zoom in</string>
 
+    <!-- User interface : Overscroll -->
+    <string name="ui_overscroll_title">Overscrolling</string>
+    <string name="pref_overscroll_title">Enable overscrolling</string>
+    <string name="pref_overscroll_summary_on">Scrollable objects overshoot and bounce back</string>
+    <string name="pref_overscroll_summary_off">Scrollable objects do not overshoot</string>
+
     <!-- User interface : Lock Screen -->
     <string name="ui_lockscreen_title">Screen lock settings</string>
     <string name="pref_lockscreen_delay_title">Delay</string>
@@ -42,8 +48,7 @@
     <!-- Status Bar, Battery -->
     <string name="battery_title">Battery</string>
     <string name="pref_battery_percentage_title">Battery percentage</string>
-    <string name="pref_battery_percentage_summary">Battery percentage displayed in the status bar
-    </string>
+    <string name="pref_battery_percentage_summary">Battery percentage displayed in the status bar</string>
     <string name="battery_status_color_title">Battery percentage color</string>
 
     <!-- Status Bar, Clock -->
@@ -55,8 +60,8 @@
     <!-- Status Bar, dBm Signal -->
     <string name="dbm_title">dBm signal strength</string>
     <string name="title_show_dbm">Show dBm</string>
-    <string name="summary_on_show_dbm">Signal strength in dBm displayed in the status bar</string>
-    <string name="summary_off_show_dbm">Signal strength in dBm displayed in the status bar</string>
+    <string name="summary_on_show_dbm">Signal strength in dBm is displayed in the status bar</string>
+    <string name="summary_off_show_dbm">Signal strength in dBm is not displayed in the status bar</string>
     <string name="title_hide_signal_dbm">Hide signal strength</string>
     <string name="summary_on_hide_signal_dbm">Signal strength icon is disabled only dBm will show</string>
     <string name="summary_off_hide_signal_dbm">Signal strength icon is enabled</string>
@@ -74,24 +79,20 @@
     <string name="plmn_title">PLMN carrier string</string>
     <string name="title_show_plmn_ls">Display PLMN (lockscreen)</string>
     <string name="summary_on_show_plmn_ls">PLMN field is displayed on lockscreen</string>
-    <string name="summary_off_show_plmn_ls">PLMN field is not displayed on lockscreen
-    </string>
+    <string name="summary_off_show_plmn_ls">PLMN field is not displayed on lockscreen</string>
     <string name="title_show_plmn_sb">Display PLMN (status bar)</string>
     <string name="summary_on_show_plmn_sb">PLMN field is displayed in status bar</string>
-    <string name="summary_off_show_plmn_sb">PLMN field is not displayed in status bar
-    </string>
+    <string name="summary_off_show_plmn_sb">PLMN field is not displayed in status bar</string>
     <string name="title_plmn_label_color">Carrier PLMN label color</string>
 
     <!-- Date and Provider, SPN -->
     <string name="spn_title">SPN carrier string</string>
     <string name="title_show_spn_ls">Display SPN (lockscreen)</string>
     <string name="summary_on_show_spn_ls">SPN field is displayed on lockscreen</string>
-    <string name="summary_off_show_spn_ls">SPN field is not displayed on lockscreen
-    </string>
+    <string name="summary_off_show_spn_ls">SPN field is not displayed on lockscreen</string>
     <string name="title_show_spn_sb">Display SPN (status bar)</string>
     <string name="summary_on_show_spn_sb">SPN field is displayed in status bar</string>
-    <string name="summary_off_show_spn_sb">SPN field is not displayed in status bar
-    </string>
+    <string name="summary_off_show_spn_sb">SPN field is not displayed in status bar</string>
     <string name="title_spn_label_color">Carrier SPN label color</string>
 
     <!-- Notifications -->
@@ -197,6 +198,8 @@
     <string name="pref_menu_unlock_summary">Pressing the menu button unlocks the device</string>
     <string name="pref_lockscreen_quick_unlock_control_title">Quick Unlock</string>
     <string name="pref_lockscreen_quick_unlock_control_summary">No need to press OK when entering Pin or Password. Delete counts as bad try.</string>
+    <string name="pref_lockscreen_phone_messaging_control_title">Phone and Messaging</string>
+    <string name="pref_lockscreen_phone_messaging_control_summary">Phone and Messaging accesible from Locksreen.</string>
 
 
     <!-- Long Press Home -->
@@ -469,5 +472,4 @@
     <string name="cpu_governors_list">List of available governors\nCurrently selected: %S</string>
     <string name="cpu_min_freq">Minimum CPU frequency\nCurrently: %s</string>
     <string name="cpu_max_freq">Maximum CPU frequency\nCurrently: %s</string>
-
 </resources>
