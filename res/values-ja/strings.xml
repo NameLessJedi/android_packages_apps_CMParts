@@ -189,6 +189,7 @@
     <string name="pref_lockscreen_quick_unlock_control_summary">PINやパワードを入力後、OKを押す必要を省きます。不正入力時のカウントは無効になります。</string>
     <string name="pref_lockscreen_phone_messaging_control_title">電話とメッセージ</string>
     <string name="pref_lockscreen_phone_messaging_control_summary">ロックスクリーンから電話とメッセージにアクセスできるようにする</string>
+    <string name="pref_messaging_tab_app_title">メッセージアプリケーション</string>
 
     <!-- Long Press Home -->
     <string name="long_press_home_title">ホーム長押し設定</string>
@@ -464,4 +465,35 @@
 
     <string name="cmstats_title">匿名利用状況</string>
     <string name="cmstats_summary">匿名の利用状況レポートを有効にすることによってCMの改善に協力できます</string>
+    <string name="user_defined_key1">クイックキー1</string>
+    <string name="user_defined_key2">クイックキー2</string>
+    <string name="user_defined_key3">クイックキー3</string>
+    <string name="user_defined_not_set">なし</string>
+
+    <!--  Lockscreen gesture strings -->
+    <string name="pref_lockscreen_title">ロックスクリーンジェスチャー</string>
+    <string name="pref_lockscreen_gestures_enable_title">ジェスチャーを有効にする</string>
+    <string name="pref_lockscreen_gestures_trail_title">軌跡を表示する</string>
+    <string name="pref_lockscreen_gestures_builder_title">ジェスチャーを作成</string>
+    <string name="pref_lockscreen_gestures_sensitivity_title">感度</string>
+    <string name="label_create_gesture">ジェスチャーを作成</string>
+    <string name="gestures_button_add">ジェスチャーを追加</string>
+    <string name="gestures_button_discard">破棄</string>
+    <string name="gestures_button_done">完了</string>
+    <string name="gestures_shortcut_picker_button_label">このジェスチャーに割り当てるショートカットやアクティビティを選択</string>
+    <string name="gestures_error_missing_shortcut">ジェスチャーにアクションを割り当てる必要があります！</string>
+    <string name="gestures_save_success">%s にジェスチャーを保存しました</string>
+    <string name="gestures_cancel_action">キャンセル</string>
+    <string name="gestures_loading">ジェスチャーをロード中...</string>
+    <string name="gestures_empty">ジェスチャーなし</string>
+    <string name="gestures_activity">ジェスチャー</string>
+    <string name="gestures_delete">削除</string>
+    <string name="gestures_delete_success">ジェスチャーを削除しました</string>
+    <string name="gestures_error_loading">ジェスチャーファイルの操作に問題が発生しました</string>
+    <string name="gestures_unlock_only">アンロック</string>
+    <string name="gestures_toggle_sound">サウンドトグル</string>
+    <string name="pref_lockscreen_disable_unlock_tab">アンロックスライダーを無効にする</string>
+    <string name="pref_lockscreen_disable_unlock_tab_summary">ノート: このオプションを有効にする前に、トラックボールやメニューキー、ジェスチャーでのアンロックを設定する必要があります。</string>
+    <string name="gestures_explain_create_screen">実行するアクション(あるいはアンロックやサウンド)を選択し、スクリーンにジェスチャーを描いてください。\n縦方向(上/下)に1回のみのジェスチャーは不正になります。</string>
+
 </resources>
