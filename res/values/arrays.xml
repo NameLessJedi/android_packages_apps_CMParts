@@ -34,7 +34,7 @@
         <item>Automatic</item>
         <item>Internal</item>
         <item>External</item>
-        <item>SD-Ext</item>
+        <item>sd-ext</item>
     </string-array>
 
     <string-array name="values_install_location">

@@ -22,6 +22,7 @@
         <item>Automatica</item>
         <item>Interna</item>
         <item>Esterna</item>
+        <item>sd-ext</item>
     </string-array>
    
     <string-array name="entries_render_effect">

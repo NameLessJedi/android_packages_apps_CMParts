@@ -21,6 +21,7 @@
         <item>Автоматически</item>
         <item>Внутреняя</item>
         <item>Внешняя</item>
+        <item>sd-ext</item>
     </string-array>
 
     <string-array name="entries_render_effect">

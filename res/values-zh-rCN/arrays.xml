@@ -34,6 +34,7 @@
         <item>自动</item>
         <item>内部存储</item>
         <item>SD 卡</item>
+        <item>sd-ext</item>
     </string-array>
 
     <string-array name="entries_render_effect">

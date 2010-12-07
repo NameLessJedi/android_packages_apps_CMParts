@@ -20,6 +20,7 @@
         <item>Automàtic</item>
         <item>Intern</item>
         <item>Extern</item>
+        <item>sd-ext</item>
     </string-array>
 
     <string-array name="entries_render_effect">

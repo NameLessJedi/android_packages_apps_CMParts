@@ -21,6 +21,7 @@
         <item>自動</item>
         <item>内蔵</item>
         <item>外部</item>
+        <item>sd-ext</item>
     </string-array>
 
     <string-array name="entries_render_effect">
