@@ -31,6 +31,7 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
 	private static final String GENERAL_CATEGORY = "general_category";
 
     private static final String UI_EXP_WIDGET = "expanded_widget";
+    private static final String UI_EXP_WIDGET_HIDE_ONCHANGE = "expanded_hide_onchange";
     private static final String UI_EXP_WIDGET_COLOR = "expanded_color_mask";
     private static final String UI_EXP_WIDGET_PICKER = "widget_picker";
 	
@@ -67,6 +68,7 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
     private ListPreference mScreenLockScreenOffDelayPref;
 
     private CheckBoxPreference mPowerWidget;
+    private CheckBoxPreference mPowerWidgetHideOnChange;
     private Preference mPowerWidgetColor;
     private PreferenceScreen mPowerPicker;
 
@@ -94,11 +96,12 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
             Sensor.TYPE_LIGHT) == null) {
             ((PreferenceCategory)prefSet.findPreference(GENERAL_CATEGORY)).removePreference(mBacklightScreen);
         }
-        
-        if (!getResources().getBoolean(R.bool.has_rgb_notification_led)) {
+
+        if (!getResources().getBoolean(R.bool.has_rgb_notification_led) &&
+                !getResources().getBoolean(R.bool.has_dual_notification_led)) {
             ((PreferenceCategory)prefSet.findPreference(GENERAL_CATEGORY)).removePreference(mTrackballScreen);
         }
-        
+
         /* Rotation */
         mRotation90Pref = (CheckBoxPreference) prefSet.findPreference(ROTATION_90_PREF);
         mRotation180Pref = (CheckBoxPreference) prefSet.findPreference(ROTATION_180_PREF);
@@ -132,11 +135,16 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
 
         /* Expanded View Power Widget */
         mPowerWidget = (CheckBoxPreference) prefSet.findPreference(UI_EXP_WIDGET);
+        mPowerWidgetHideOnChange = (CheckBoxPreference)
+                prefSet.findPreference(UI_EXP_WIDGET_HIDE_ONCHANGE);
+
         mPowerWidgetColor = prefSet.findPreference(UI_EXP_WIDGET_COLOR);
         mPowerPicker = (PreferenceScreen)prefSet.findPreference(UI_EXP_WIDGET_PICKER);
 
         mPowerWidget.setChecked((Settings.System.getInt(getContentResolver(),
-                    Settings.System.EXPANDED_VIEW_WIDGET, 1) == 1));
+                Settings.System.EXPANDED_VIEW_WIDGET, 1) == 1));
+        mPowerWidgetHideOnChange.setChecked((Settings.System.getInt(getContentResolver(),
+                Settings.System.EXPANDED_HIDE_ONCHANGE, 0) == 1));
 
         /* Overscroll */
         mOverscrollPref = (CheckBoxPreference) prefSet.findPreference(OVERSCROLL_PREF);
@@ -202,6 +210,12 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
             value = mPowerWidget.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.EXPANDED_VIEW_WIDGET, value ? 1 : 0);
+        }
+
+        if(preference == mPowerWidgetHideOnChange) {
+            value = mPowerWidgetHideOnChange.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.EXPANDED_HIDE_ONCHANGE, value ? 1 : 0);
         }
 
         if (preference == mPowerWidgetColor) {

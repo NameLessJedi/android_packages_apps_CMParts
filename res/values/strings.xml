@@ -112,22 +112,22 @@
     <string name="title_notifications_items_text">Items text color</string>
     <string name="title_notifications_items_time">Items time color</string>
 
-    <!-- User interface: Trackball notifcations -->
-    <string name="trackball_notifications_title">Trackball Notification Colors</string>
+    <!-- User interface: LED notifcations -->
+    <string name="trackball_notifications_title">LED notification colors</string>
     <string name="dialog_color_trackball">Choose a color</string>
     <string name="dialog_blink_trackball">Choose a blink rate</string>
     <string name="color_trackball_flash_title">Flash color</string>
-        <string name="color_trackball_flash_summary">Color to flash</string>
+    <string name="color_trackball_flash_summary">Color to flash</string>
     <string name="color_trackball_custom_title">Custom color</string>
-        <string name="color_trackball_custom_summary">Custom color to flash</string>
+    <string name="color_trackball_custom_summary">Custom color to flash</string>
     <string name="color_trackball_blink_title">Blink rate</string>
-        <string name="color_trackball_blink_summary">Blink rate</string>
+    <string name="color_trackball_blink_summary">Blink rate</string>
     <string name="color_trackball_test_title">Flash test</string>
-        <string name="color_trackball_test_summary">Test the flash</string>
-        <string name="dialog_clear_flash">Clear Flash</string>
+    <string name="color_trackball_test_summary">Test the flash</string>
+    <string name="dialog_clear_flash">Clear Flash</string>
     <string name="trackball_advanced_title">Advanced</string>
     <string name="pref_trackball_screen_title">Always pulse</string>
-    <string name="pref_trackball_screen_summary">Trackball will pulse while screen is on.</string>
+    <string name="pref_trackball_screen_summary">LED will pulse while screen is on</string>
     <string name="pref_trackball_blend_title">Blend notifications</string>
     <string name="pref_trackball_blend_summary">Blend notification colors. Overrides succession.</string>
     <string name="pref_trackball_sucess_title">Succession</string>
@@ -139,11 +139,11 @@
     <string name="pref_trackball_reset_title">Reset</string>
     <string name="pref_trackball_reset_summary">Reset all colors and apps</string>
     <string name="dialog_trackball_loading">Loading...</string>
-    <string name="dialog_trackball_packagelist">Loading Package List</string>
+    <string name="dialog_trackball_packagelist">Loading package list</string>
     <string name="trackball_category_dialog_text">Please enter a new category</string>
     <string name="trackball_category_list_title">Category</string>
     <string name="trackball_category_list_summary">Choose a category</string>
-    <string name="trackball_category_screen">Manage Categories</string>
+    <string name="trackball_category_screen">Manage categories</string>
     <string name="trackball_category_add_title">Add category</string>
     <string name="trackball_category_add_summary">Add a category to the list</string>
     <string name="trackball_category_remove_title">Remove category</string>
@@ -151,9 +151,11 @@
     <string name="trackball_remove_default_toast">Can\'t remove this category as its the default one.</string>
     <string name="trackball_reset_all">Reset all colors and categories.</string>
     <string name="trackball_array_error">Unfortunately there was an array error. This package has been forced into Miscellaneous category.</string>
+    <string name="trackball_color_notice_title">NOTE:</string>
+    <string name="trackball_color_notice_summary">Not all colors will display on all devices.</string>
 
     <!-- Trackball Settings : Warning dialog -->
-    <string name="notification_battery_warning_title">WARNING: May Cause Battery Drain</string>
+    <string name="notification_battery_warning_title">WARNING: May cause battery drain</string>
     <string name="notification_battery_warning">This option has been proven to increase the amount of battery drain by ~3% per hour. If you notice an increase in drain during trackball lights pulsing then this option is why. Do not enable if you don\'t wish to incur the drain.</string>
 
 
@@ -348,6 +350,8 @@
     <string name="title_widget_buttons">Expanded View Widget</string>
     <string name="title_expanded_widget">Notification power widget</string>
     <string name="summary_expanded_widget">Use the expanded views power widget</string>
+    <string name="title_expanded_hide_onchange">Hide on change</string>
+    <string name="summary_expanded_hide_onchange">Hide the notification pulldown after toggling a widget button</string>
     <string name="expanded_color_mask">Indicator color</string>
     <string name="title_widget_picker">Widget buttons</string>
     <string name="summary_widget_picker">Pick your widget buttons</string>
@@ -489,6 +493,7 @@
     <string name="pref_lockscreen_gestures_trail_title">Show gesture trails</string>
     <string name="pref_lockscreen_gestures_builder_title">Build gestures</string>
     <string name="pref_lockscreen_gestures_sensitivity_title">Sensitivity</string>
+    <string name="pref_lockscreen_gestures_color_title">Gestures color</string>
     <string name="label_create_gesture">Create a gesture</string>
     <string name="gestures_button_add">Add gesture</string>
     <string name="gestures_button_discard">Discard</string>
@@ -505,6 +510,7 @@
     <string name="gestures_error_loading">Problem with gesture file operation.</string>
     <string name="gestures_unlock_only">Unlock phone</string>
     <string name="gestures_toggle_sound">Toggle sound</string>
+    <string name="gestures_flashlight">Flashlight</string>
     <string name="pref_lockscreen_disable_unlock_tab">Disable unlock slider</string>
     <string name="pref_lockscreen_disable_unlock_tab_summary">Note: You need to enable trackball, menu key, or gesture unlocking before this option becomes available</string>
     <string name="gestures_explain_create_screen">Pick an action to perform (or select Unlock or Sound) and draw a gesture on the screen.</string>

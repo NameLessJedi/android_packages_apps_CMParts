@@ -21,6 +21,7 @@
         <item>자동</item>
         <item>내부</item>
         <item>외부</item>
+        <item>sd-ext</item>
     </string-array>
 
     <string-array name="entries_render_effect">
