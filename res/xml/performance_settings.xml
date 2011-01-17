@@ -7,7 +7,7 @@
             android:targetClass="com.cyanogenmod.cmparts.activities.CPUActivity" />
     </PreferenceScreen>
 
-    <ListPreference android:key="pref_compcache_size" android:dialogTitle="@string/pref_compcache_title"
+    <ListPreference android:key="pref_compcache" android:dialogTitle="@string/pref_compcache_title"
         android:title="@string/pref_compcache_title" android:summary="@string/pref_compcache_summary"
         android:entries="@array/pref_compcache_size_entries" android:entryValues="@array/pref_compcache_size_values" />
 
