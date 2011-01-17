@@ -205,7 +205,8 @@
     <string name="pref_lockscreen_phone_messaging_control_title">Phone and Messaging</string>
     <string name="pref_lockscreen_phone_messaging_control_summary">Phone and Messaging accessible from Lockscreen.</string>
     <string name="pref_messaging_tab_app_title">Messaging tab application</string>
-
+    <string name="pref_lockscreen_style_title">Lockscreen style</string>
+    <string name="pref_lockscreen_style_summary">Choose the style of the lockscreen</string>
 
     <!-- Long Press Home -->
     <string name="long_press_home_title">Long-press home settings</string>
@@ -392,10 +393,6 @@
     <string name="pref_lock_mms_title">Lock messaging app in memory</string>
     <string name="pref_lock_mms_summary">Avoid lost messages on low memory situations</string>
 
-    <!-- CPU Settings -->
-    <string name="cpu_settings_title">CPU Settings</string>
-
-
     <!-- Backlight -->
     <string name="backlight_title">Automatic backlight</string>
     <string name="backlight_summary">Tweak levels and filtering</string>
@@ -474,12 +471,6 @@
     <string name="quiet_hours_dim_on">LED will dim if possible</string>
     <string name="quiet_hours_dim_off">LED will be full brightness</string>
 
-    <!-- CPU Settings -->
-    <string name="cpu_title">CPU Settings</string>
-    <string name="cpu_governors_list">List of available governors\nCurrently selected: %S</string>
-    <string name="cpu_min_freq">Minimum CPU frequency\nCurrently: %s</string>
-    <string name="cpu_max_freq">Maximum CPU frequency\nCurrently: %s</string>
-
     <string name="cmstats_title">Anonymous statistics</string>
     <string name="cmstats_summary">Help make CM better by opting-in to anonymous statistics reporting</string>
     <string name="user_defined_key1">Quick Key 1</string>
@@ -514,4 +505,14 @@
     <string name="pref_lockscreen_disable_unlock_tab">Disable unlock slider</string>
     <string name="pref_lockscreen_disable_unlock_tab_summary">Note: You need to enable trackball, menu key, or gesture unlocking before this option becomes available</string>
     <string name="gestures_explain_create_screen">Pick an action to perform (or select Unlock or Sound) and draw a gesture on the screen.</string>
+
+    <!-- CPU Settings strings -->
+    <string name="cpu_settings_title">CPU Settings</string>
+    <string name="cpu_title">CPU Settings</string>
+    <string name="cpu_summary">Governor and clock settings</string>
+    <string name="cpu_governors_list">List of available governors\nCurrently selected: %S</string>
+    <string name="cpu_min_freq">Minimum CPU frequency\nCurrently: %s</string>
+    <string name="cpu_max_freq">Maximum CPU frequency\nCurrently: %s</string>
+    <string name="cpu_set_on_boot">Set on boot</string>
+    <string name="cpu_set_on_boot_summary">Restore CPU Settings on boot</string>
 </resources>
