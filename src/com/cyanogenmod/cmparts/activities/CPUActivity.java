@@ -3,6 +3,7 @@ package com.cyanogenmod.cmparts.activities;
 import com.cyanogenmod.cmparts.R;
 
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -94,7 +95,7 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         maxFreqPref.setSummary(String.format(MAX_FMT, MHerzed(temp)));
         maxFreqPref.setOnPreferenceChangeListener(this);
 
-        setOnBootPref = (CheckBoxPreference) PrefScree.findPreference(SOB_PREF);
+        setOnBootPref = (CheckBoxPreference) PrefScreen.findPreference(SOB_PREF);
         String[] fileNames = { "data/.nocpu", "/sd-ext/.nocpu" };
         for(int i=0; i<fileNames.length; i++)
         {
@@ -102,7 +103,7 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
             if (mNoCPU.exists()){
                 setOnBootPref.setChecked(false);
                 try {
-                    mNoCPUd.delete();
+                    mNoCPU.delete();
                 } catch (Exception e) {
                     Toast.makeText(this,"Unable to delete " + fileNames[i] + ". Please delete manualy.",
                             Toast.LENGTH_LONG).show();
