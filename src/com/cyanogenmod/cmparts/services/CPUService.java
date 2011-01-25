@@ -8,9 +8,11 @@ import android.os.IBinder;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.List;
+import java.io.File;
 
 import com.cyanogenmod.cmparts.activities.CPUActivity;
 
@@ -31,6 +33,14 @@ public class CPUService extends Service {
 
         if (mPrefs.getBoolean(CPUActivity.SOB_PREF, false) == false) {
             Log.i(TAG, "Restore disabled by user preference.");
+            return;
+        }
+
+        File new mNoCPUd = "/data/.nocpu";
+        File new mNoCPUs = "/sd-ext/.nocpu";
+        if (mNoCPUd.exists() || mNoCPUs.exists()) {
+            Log.i(TAG, "Restore disabled by user file.");
+            stopSelf();
             return;
         }
 
@@ -56,7 +66,9 @@ public class CPUService extends Service {
                 CPUActivity.writeOneLine(CPUActivity.FREQ_MIN_FILE, mMinFreq);
             }
             Log.i(TAG, "CPU Settings restored.");
+            Toast.makeText(this, "CPU Settigns restored", Toast.LENGTH_LONG).show();
         }
+        stopSelf();
         return;
     }
 }

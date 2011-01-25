@@ -8,12 +8,14 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.File;
 import java.lang.Process;
 
 //
@@ -39,6 +41,8 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
     private ListPreference govPref;
     private ListPreference minFreqPref;
     private ListPreference maxFreqPref;
+    private CheckBoxPreference setOnBootPref;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +93,22 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
         maxFreqPref.setValue(temp);
         maxFreqPref.setSummary(String.format(MAX_FMT, MHerzed(temp)));
         maxFreqPref.setOnPreferenceChangeListener(this);
+
+        setOnBootPref = (CheckBoxPreference) PrefScree.findPreference(SOB_PREF);
+        String[] fileNames = { "data/.nocpu", "/sd-ext/.nocpu" };
+        for(int i=0; i<fileNames.length; i++)
+        {
+            File mNoCPU = new File(fileNames[i]);
+            if (mNoCPU.exists()){
+                setOnBootPref.setChecked(false);
+                try {
+                    mNoCPUd.delete();
+                } catch (Exception e) {
+                    Toast.makeText(this,"Unable to delete " + fileNames[i] + ". Please delete manualy.",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        }
     }
 
     @Override
