@@ -36,8 +36,8 @@ public class CPUService extends Service {
             return;
         }
 
-        File new mNoCPUd = "/data/.nocpu";
-        File new mNoCPUs = "/sd-ext/.nocpu";
+        File mNoCPUd = new File("/data/.nocpu");
+        File mNoCPUs = new File ("/sd-ext/.nocpu");
         if (mNoCPUd.exists() || mNoCPUs.exists()) {
             Log.i(TAG, "Restore disabled by user file.");
             stopSelf();
