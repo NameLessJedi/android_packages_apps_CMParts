@@ -20,6 +20,7 @@
         <item>Automatique</item>
         <item>Interne</item>
         <item>Externe</item>
+        <item>sd-ext</item>
     </string-array>
 
     <string-array name="entries_render_effect">
@@ -27,25 +28,33 @@
         <item>Mode nuit (rouge)</item>
         <item>Terminal (vert)</item>
         <item>Bleu</item>
-        <item>Ambre</item>
+        <item>Orange</item>
         <item>Saumon</item>
         <item>Fuchsia</item>
-	    <item>Calibré (N1)</item>
-	    <item>Calibré (N1) Rouge</item>
-	    <item>Calibré (N1) Froid</item>
+        <item>Calibré (N1)</item>
+        <item>Calibré (N1) Rouge</item>
+        <item>Calibré (N1) Froid</item>
     </string-array>
 
-	<string-array name="render_entries">
+    <string-array name="render_entries">
         <item>Mode nuit (rouge)</item>
         <item>Terminal (vert)</item>
         <item>Bleu</item>
-        <item>Ambre</item>
+        <item>Orange</item>
         <item>Saumon</item>
         <item>Fuchsia</item>
-	    <item>Calibré (N1)</item>
-	    <item>Calibré (N1) Rouge</item>
-	    <item>Calibré (N1) Froid</item>
-	</string-array>
+        <item>Calibré (N1)</item>
+        <item>Calibré (N1) Rouge</item>
+        <item>Calibré (N1) Froid</item>
+    </string-array>
+
+    <string-array name="entries_overscroll_weight">
+        <item>Extra long</item>
+        <item>Long</item>
+        <item>Moyen</item>
+        <item>Court</item>
+        <item>Extra court</item>
+    </string-array>
 
     <string-array name="entries_trackball_colors">
         <item>Vert</item>
@@ -58,11 +67,17 @@
         <item>Rose</item>
         <item>Orange</item>
         <item>Blue ciel</item>
-	    <item>Aléatoire</item>
-	    <item>Aucune</item>
+        <item>Aléatoire</item>
+        <item>Aucune</item>
     </string-array>
 
-	<string-array name="pref_trackball_blink_rate_entries">
+    <string-array name="entries_dual_led_colors">
+        <item>Vert</item>
+        <item>Orange</item>
+        <item>Aucune</item>
+    </string-array>
+
+    <string-array name="pref_trackball_blink_rate_entries">
         <item>2 (Rapide)</item>
         <item>3</item>
         <item>4 (Moyen)</item>
@@ -107,5 +122,20 @@
     <string-array name="entries_sound_limitvol">
         <item>Réglage atténué du système</item>
         <item>Volume de la musique (par défaut)</item>
+    </string-array>
+
+    <string-array name="pref_lockscreen_gestures_sensitivity_entries">
+        <item>1 (le plus vague)</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12 (le plus strict)</item>
     </string-array>
 </resources>

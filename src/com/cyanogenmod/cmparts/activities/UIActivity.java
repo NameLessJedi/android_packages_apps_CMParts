@@ -31,6 +31,7 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
 	private static final String GENERAL_CATEGORY = "general_category";
 
     private static final String UI_EXP_WIDGET = "expanded_widget";
+    private static final String UI_EXP_WIDGET_HIDE_ONCHANGE = "expanded_hide_onchange";
     private static final String UI_EXP_WIDGET_COLOR = "expanded_color_mask";
     private static final String UI_EXP_WIDGET_PICKER = "widget_picker";
 	
@@ -48,6 +49,8 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
     private static final String ROTATION_270_PREF = "pref_rotation_270";
     private static final String RENDER_EFFECT_PREF = "pref_render_effect";
     private static final String POWER_PROMPT_PREF = "power_dialog_prompt";
+    private static final String OVERSCROLL_PREF = "pref_overscroll";
+    private static final String OVERSCROLL_WEIGHT_PREF = "pref_overscroll_weight";
     
     /* Screen Lock */
     private static final String LOCKSCREEN_TIMEOUT_DELAY_PREF = "pref_lockscreen_timeout_delay";
@@ -65,8 +68,12 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
     private ListPreference mScreenLockScreenOffDelayPref;
 
     private CheckBoxPreference mPowerWidget;
+    private CheckBoxPreference mPowerWidgetHideOnChange;
     private Preference mPowerWidgetColor;
     private PreferenceScreen mPowerPicker;
+
+    private CheckBoxPreference mOverscrollPref;
+    private ListPreference mOverscrollWeightPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,11 +96,12 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
             Sensor.TYPE_LIGHT) == null) {
             ((PreferenceCategory)prefSet.findPreference(GENERAL_CATEGORY)).removePreference(mBacklightScreen);
         }
-        
-        if (!getResources().getBoolean(R.bool.has_rgb_notification_led)) {
+
+        if (!getResources().getBoolean(R.bool.has_rgb_notification_led) &&
+                !getResources().getBoolean(R.bool.has_dual_notification_led)) {
             ((PreferenceCategory)prefSet.findPreference(GENERAL_CATEGORY)).removePreference(mTrackballScreen);
         }
-        
+
         /* Rotation */
         mRotation90Pref = (CheckBoxPreference) prefSet.findPreference(ROTATION_90_PREF);
         mRotation180Pref = (CheckBoxPreference) prefSet.findPreference(ROTATION_180_PREF);
@@ -127,11 +135,26 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
 
         /* Expanded View Power Widget */
         mPowerWidget = (CheckBoxPreference) prefSet.findPreference(UI_EXP_WIDGET);
+        mPowerWidgetHideOnChange = (CheckBoxPreference)
+                prefSet.findPreference(UI_EXP_WIDGET_HIDE_ONCHANGE);
+
         mPowerWidgetColor = prefSet.findPreference(UI_EXP_WIDGET_COLOR);
         mPowerPicker = (PreferenceScreen)prefSet.findPreference(UI_EXP_WIDGET_PICKER);
 
         mPowerWidget.setChecked((Settings.System.getInt(getContentResolver(),
-                    Settings.System.EXPANDED_VIEW_WIDGET, 1) == 1));
+                Settings.System.EXPANDED_VIEW_WIDGET, 1) == 1));
+        mPowerWidgetHideOnChange.setChecked((Settings.System.getInt(getContentResolver(),
+                Settings.System.EXPANDED_HIDE_ONCHANGE, 0) == 1));
+
+        /* Overscroll */
+        mOverscrollPref = (CheckBoxPreference) prefSet.findPreference(OVERSCROLL_PREF);
+        mOverscrollPref.setChecked(Settings.System.getInt(getContentResolver(), 
+                Settings.System.ALLOW_OVERSCROLL, 0) == 1);
+
+        mOverscrollWeightPref = (ListPreference) prefSet.findPreference(OVERSCROLL_WEIGHT_PREF);
+        int overscrollWeight = Settings.System.getInt(getContentResolver(), Settings.System.OVERSCROLL_WEIGHT, 5);
+        mOverscrollWeightPref.setValue(String.valueOf(overscrollWeight));
+        mOverscrollWeightPref.setOnPreferenceChangeListener(this);
     }
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
@@ -189,11 +212,23 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
                     Settings.System.EXPANDED_VIEW_WIDGET, value ? 1 : 0);
         }
 
+        if(preference == mPowerWidgetHideOnChange) {
+            value = mPowerWidgetHideOnChange.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.EXPANDED_HIDE_ONCHANGE, value ? 1 : 0);
+        }
+
         if (preference == mPowerWidgetColor) {
             ColorPickerDialog cp = new ColorPickerDialog(this,
                 mWidgetColorListener,
                 readWidgetColor());
             cp.show();
+        }
+
+        if (preference == mOverscrollPref) {
+            value = mOverscrollPref.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.ALLOW_OVERSCROLL, value ? 1 : 0);
         }
 
         return true;
@@ -210,6 +245,10 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
         } else if (preference == mScreenLockScreenOffDelayPref) {
             int screenOffDelay = Integer.valueOf((String)newValue);
             Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_LOCK_SCREENOFF_DELAY, screenOffDelay);
+            return true;
+        } else if (preference == mOverscrollWeightPref) {
+            int overscrollWeight = Integer.valueOf((String)newValue);
+            Settings.System.putInt(getContentResolver(), Settings.System.OVERSCROLL_WEIGHT, overscrollWeight);
             return true;
         }
         return false;

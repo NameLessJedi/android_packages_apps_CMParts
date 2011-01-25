@@ -77,6 +77,11 @@
          android:title="@string/title_expanded_widget"
          android:summary="@string/summary_expanded_widget"
          android:defaultValue="true" />
+      <CheckBoxPreference android:key="expanded_hide_onchange"
+         android:title="@string/title_expanded_hide_onchange"
+         android:summary="@string/summary_expanded_hide_onchange"
+         android:defaultValue="false"
+         android:dependency="expanded_widget" />
       <Preference
          android:key="expanded_color_mask"
          android:title="@string/expanded_color_mask"
@@ -107,6 +112,18 @@
         <CheckBoxPreference android:key="pref_pinch_reflow"
             android:title="@string/pref_pinch_reflow_title"
             android:summary="@string/pref_pinch_reflow_summary" />
+    </PreferenceCategory>
+
+    <!-- Overscrolling -->
+    <PreferenceCategory android:title="@string/ui_overscroll_title">
+        <CheckBoxPreference android:key="pref_overscroll"
+            android:title="@string/pref_overscroll_title"
+            android:summaryOn="@string/pref_overscroll_summary_on"
+            android:summaryOff="@string/pref_overscroll_summary_off" />
+        <ListPreference android:key="pref_overscroll_weight"
+            android:dependency="pref_overscroll" android:dialogTitle="@string/pref_overscroll_weight_title"
+            android:title="@string/pref_overscroll_weight_title" android:summary="@string/pref_overscroll_weight_summary"
+            android:entries="@array/entries_overscroll_weight" android:entryValues="@array/values_overscroll_weight" />
     </PreferenceCategory>
     
     <PreferenceCategory android:title="@string/ui_lockscreen_title">

@@ -23,6 +23,14 @@
     <string name="pref_pinch_reflow_title">Reflow after pinch in</string>
     <string name="pref_pinch_reflow_summary">Reflow content immediately after pinch to zoom in</string>
 
+    <!-- User interface : Overscroll -->
+    <string name="ui_overscroll_title">Overscrolling</string>
+    <string name="pref_overscroll_title">Enable overscrolling</string>
+    <string name="pref_overscroll_summary_on">Scrollable objects overshoot and bounce back</string>
+    <string name="pref_overscroll_summary_off">Scrollable objects do not overshoot</string>
+    <string name="pref_overscroll_weight_title">Overscrolling weight</string>
+    <string name="pref_overscroll_weight_summary">Select the weight of the scrollable objects</string>
+
     <!-- User interface : Lock Screen -->
     <string name="ui_lockscreen_title">Screen lock settings</string>
     <string name="pref_lockscreen_delay_title">Delay</string>
@@ -42,8 +50,7 @@
     <!-- Status Bar, Battery -->
     <string name="battery_title">Battery</string>
     <string name="pref_battery_percentage_title">Battery percentage</string>
-    <string name="pref_battery_percentage_summary">Battery percentage displayed in the status bar
-    </string>
+    <string name="pref_battery_percentage_summary">Battery percentage displayed in the status bar</string>
     <string name="battery_status_color_title">Battery percentage color</string>
 
     <!-- Status Bar, Clock -->
@@ -55,8 +62,8 @@
     <!-- Status Bar, dBm Signal -->
     <string name="dbm_title">dBm signal strength</string>
     <string name="title_show_dbm">Show dBm</string>
-    <string name="summary_on_show_dbm">Signal strength in dBm displayed in the status bar</string>
-    <string name="summary_off_show_dbm">Signal strength in dBm displayed in the status bar</string>
+    <string name="summary_on_show_dbm">Signal strength in dBm is displayed in the status bar</string>
+    <string name="summary_off_show_dbm">Signal strength in dBm is not displayed in the status bar</string>
     <string name="title_hide_signal_dbm">Hide signal strength</string>
     <string name="summary_on_hide_signal_dbm">Signal strength icon is disabled only dBm will show</string>
     <string name="summary_off_hide_signal_dbm">Signal strength icon is enabled</string>
@@ -74,24 +81,20 @@
     <string name="plmn_title">PLMN carrier string</string>
     <string name="title_show_plmn_ls">Display PLMN (lockscreen)</string>
     <string name="summary_on_show_plmn_ls">PLMN field is displayed on lockscreen</string>
-    <string name="summary_off_show_plmn_ls">PLMN field is not displayed on lockscreen
-    </string>
+    <string name="summary_off_show_plmn_ls">PLMN field is not displayed on lockscreen</string>
     <string name="title_show_plmn_sb">Display PLMN (status bar)</string>
     <string name="summary_on_show_plmn_sb">PLMN field is displayed in status bar</string>
-    <string name="summary_off_show_plmn_sb">PLMN field is not displayed in status bar
-    </string>
+    <string name="summary_off_show_plmn_sb">PLMN field is not displayed in status bar</string>
     <string name="title_plmn_label_color">Carrier PLMN label color</string>
 
     <!-- Date and Provider, SPN -->
     <string name="spn_title">SPN carrier string</string>
     <string name="title_show_spn_ls">Display SPN (lockscreen)</string>
     <string name="summary_on_show_spn_ls">SPN field is displayed on lockscreen</string>
-    <string name="summary_off_show_spn_ls">SPN field is not displayed on lockscreen
-    </string>
+    <string name="summary_off_show_spn_ls">SPN field is not displayed on lockscreen</string>
     <string name="title_show_spn_sb">Display SPN (status bar)</string>
     <string name="summary_on_show_spn_sb">SPN field is displayed in status bar</string>
-    <string name="summary_off_show_spn_sb">SPN field is not displayed in status bar
-    </string>
+    <string name="summary_off_show_spn_sb">SPN field is not displayed in status bar</string>
     <string name="title_spn_label_color">Carrier SPN label color</string>
 
     <!-- Notifications -->
@@ -109,22 +112,22 @@
     <string name="title_notifications_items_text">Items text color</string>
     <string name="title_notifications_items_time">Items time color</string>
 
-    <!-- User interface: Trackball notifcations -->
-    <string name="trackball_notifications_title">Trackball Notification Colors</string>
+    <!-- User interface: LED notifcations -->
+    <string name="trackball_notifications_title">LED notification colors</string>
     <string name="dialog_color_trackball">Choose a color</string>
     <string name="dialog_blink_trackball">Choose a blink rate</string>
     <string name="color_trackball_flash_title">Flash color</string>
-        <string name="color_trackball_flash_summary">Color to flash</string>
+    <string name="color_trackball_flash_summary">Color to flash</string>
     <string name="color_trackball_custom_title">Custom color</string>
-        <string name="color_trackball_custom_summary">Custom color to flash</string>
+    <string name="color_trackball_custom_summary">Custom color to flash</string>
     <string name="color_trackball_blink_title">Blink rate</string>
-        <string name="color_trackball_blink_summary">Blink rate</string>
+    <string name="color_trackball_blink_summary">Blink rate</string>
     <string name="color_trackball_test_title">Flash test</string>
-        <string name="color_trackball_test_summary">Test the flash</string>
-        <string name="dialog_clear_flash">Clear Flash</string>
+    <string name="color_trackball_test_summary">Test the flash</string>
+    <string name="dialog_clear_flash">Clear Flash</string>
     <string name="trackball_advanced_title">Advanced</string>
     <string name="pref_trackball_screen_title">Always pulse</string>
-    <string name="pref_trackball_screen_summary">Trackball will pulse while screen is on.</string>
+    <string name="pref_trackball_screen_summary">LED will pulse while screen is on</string>
     <string name="pref_trackball_blend_title">Blend notifications</string>
     <string name="pref_trackball_blend_summary">Blend notification colors. Overrides succession.</string>
     <string name="pref_trackball_sucess_title">Succession</string>
@@ -136,11 +139,11 @@
     <string name="pref_trackball_reset_title">Reset</string>
     <string name="pref_trackball_reset_summary">Reset all colors and apps</string>
     <string name="dialog_trackball_loading">Loading...</string>
-    <string name="dialog_trackball_packagelist">Loading Package List</string>
+    <string name="dialog_trackball_packagelist">Loading package list</string>
     <string name="trackball_category_dialog_text">Please enter a new category</string>
     <string name="trackball_category_list_title">Category</string>
     <string name="trackball_category_list_summary">Choose a category</string>
-    <string name="trackball_category_screen">Manage Categories</string>
+    <string name="trackball_category_screen">Manage categories</string>
     <string name="trackball_category_add_title">Add category</string>
     <string name="trackball_category_add_summary">Add a category to the list</string>
     <string name="trackball_category_remove_title">Remove category</string>
@@ -148,9 +151,11 @@
     <string name="trackball_remove_default_toast">Can\'t remove this category as its the default one.</string>
     <string name="trackball_reset_all">Reset all colors and categories.</string>
     <string name="trackball_array_error">Unfortunately there was an array error. This package has been forced into Miscellaneous category.</string>
+    <string name="trackball_color_notice_title">NOTE:</string>
+    <string name="trackball_color_notice_summary">Not all colors will display on all devices.</string>
 
     <!-- Trackball Settings : Warning dialog -->
-    <string name="notification_battery_warning_title">WARNING: May Cause Battery Drain</string>
+    <string name="notification_battery_warning_title">WARNING: May cause battery drain</string>
     <string name="notification_battery_warning">This option has been proven to increase the amount of battery drain by ~3% per hour. If you notice an increase in drain during trackball lights pulsing then this option is why. Do not enable if you don\'t wish to incur the drain.</string>
 
 
@@ -197,7 +202,11 @@
     <string name="pref_menu_unlock_summary">Pressing the menu button unlocks the device</string>
     <string name="pref_lockscreen_quick_unlock_control_title">Quick Unlock</string>
     <string name="pref_lockscreen_quick_unlock_control_summary">No need to press OK when entering Pin or Password. Delete counts as bad try.</string>
-
+    <string name="pref_lockscreen_phone_messaging_control_title">Phone and Messaging</string>
+    <string name="pref_lockscreen_phone_messaging_control_summary">Phone and Messaging accessible from Lockscreen.</string>
+    <string name="pref_messaging_tab_app_title">Messaging tab application</string>
+    <string name="pref_lockscreen_style_title">Lockscreen style</string>
+    <string name="pref_lockscreen_style_summary">Choose the style of the lockscreen</string>
 
     <!-- Long Press Home -->
     <string name="long_press_home_title">Long-press home settings</string>
@@ -246,10 +255,6 @@
     <!-- Application Settings : Move any app -->
     <string name="pref_move_all_apps_title">Allow application moving</string>
     <string name="pref_move_all_apps_summary">Allow moving of any application to external storage</string>
-
-    <!-- Application Settings : enable dex2sd -->
-    <string name="pref_enable_dex2sd_title">Enable dex2sd</string>
-    <string name="pref_enable_dex2sd_summary">Push dalvik-cache from internal to SD card; (requires restart)</string>
 
     <!-- Application Settings : Install Location -->
     <string name="pref_install_location_title">Install location</string>
@@ -346,6 +351,8 @@
     <string name="title_widget_buttons">Expanded View Widget</string>
     <string name="title_expanded_widget">Notification power widget</string>
     <string name="summary_expanded_widget">Use the expanded views power widget</string>
+    <string name="title_expanded_hide_onchange">Hide on change</string>
+    <string name="summary_expanded_hide_onchange">Hide the notification pulldown after toggling a widget button</string>
     <string name="expanded_color_mask">Indicator color</string>
     <string name="title_widget_picker">Widget buttons</string>
     <string name="summary_widget_picker">Pick your widget buttons</string>
@@ -385,10 +392,6 @@
     <!-- Performance : Lock mms app in memory -->
     <string name="pref_lock_mms_title">Lock messaging app in memory</string>
     <string name="pref_lock_mms_summary">Avoid lost messages on low memory situations</string>
-
-    <!-- CPU Settings -->
-    <string name="cpu_settings_title">CPU Settings</string>
-
 
     <!-- Backlight -->
     <string name="backlight_title">Automatic backlight</string>
@@ -468,10 +471,48 @@
     <string name="quiet_hours_dim_on">LED will dim if possible</string>
     <string name="quiet_hours_dim_off">LED will be full brightness</string>
 
-    <!-- CPU Settings -->
+    <string name="cmstats_title">Anonymous statistics</string>
+    <string name="cmstats_summary">Help make CM better by opting-in to anonymous statistics reporting</string>
+    <string name="user_defined_key1">Quick Key 1</string>
+    <string name="user_defined_key2">Quick Key 2</string>
+    <string name="user_defined_key3">Quick Key 3</string>
+    <string name="user_defined_not_set">Nothing Set</string>
+
+    <!--  Lockscreen gesture strings -->
+    <string name="pref_lockscreen_title">Lockscreen gestures</string>
+    <string name="pref_lockscreen_gestures_enable_title">Use lockscreen gestures</string>
+    <string name="pref_lockscreen_gestures_trail_title">Show gesture trails</string>
+    <string name="pref_lockscreen_gestures_builder_title">Build gestures</string>
+    <string name="pref_lockscreen_gestures_sensitivity_title">Sensitivity</string>
+    <string name="pref_lockscreen_gestures_color_title">Gestures color</string>
+    <string name="label_create_gesture">Create a gesture</string>
+    <string name="gestures_button_add">Add gesture</string>
+    <string name="gestures_button_discard">Discard</string>
+    <string name="gestures_button_done">Done</string>
+    <string name="gestures_shortcut_picker_button_label">Pick a shortcut or activity for this gesture</string>
+    <string name="gestures_error_missing_shortcut">You must pick an action for this gesture!</string>
+    <string name="gestures_save_success">Gesture saved in %s</string>
+    <string name="gestures_cancel_action">Cancel</string>
+    <string name="gestures_loading">Loading gestures...</string>
+    <string name="gestures_empty">No gestures</string>
+    <string name="gestures_activity">Gestures</string>
+    <string name="gestures_delete">Delete</string>
+    <string name="gestures_delete_success">Gesture deleted</string>
+    <string name="gestures_error_loading">Problem with gesture file operation.</string>
+    <string name="gestures_unlock_only">Unlock phone</string>
+    <string name="gestures_toggle_sound">Toggle sound</string>
+    <string name="gestures_flashlight">Flashlight</string>
+    <string name="pref_lockscreen_disable_unlock_tab">Disable unlock slider</string>
+    <string name="pref_lockscreen_disable_unlock_tab_summary">Note: You need to enable trackball, menu key, or gesture unlocking before this option becomes available</string>
+    <string name="gestures_explain_create_screen">Pick an action to perform (or select Unlock or Sound) and draw a gesture on the screen.</string>
+
+    <!-- CPU Settings strings -->
+    <string name="cpu_settings_title">CPU Settings</string>
     <string name="cpu_title">CPU Settings</string>
+    <string name="cpu_summary">Governor and clock settings</string>
     <string name="cpu_governors_list">List of available governors\nCurrently selected: %S</string>
     <string name="cpu_min_freq">Minimum CPU frequency\nCurrently: %s</string>
     <string name="cpu_max_freq">Maximum CPU frequency\nCurrently: %s</string>
-
+    <string name="cpu_set_on_boot">Set on boot</string>
+    <string name="cpu_set_on_boot_summary">Restore CPU Settings on boot</string>
 </resources>

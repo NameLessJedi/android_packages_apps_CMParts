@@ -21,6 +21,7 @@
         <item>自動</item>
         <item>内蔵</item>
         <item>外部</item>
+        <item>sd-ext</item>
     </string-array>
 
     <string-array name="entries_render_effect">
@@ -46,6 +47,14 @@
         <item>調整済み(N1)</item>
         <item>調整済み(N1) Low Red</item>
         <item>調整済み(N1) Cold</item>
+    </string-array>
+
+    <string-array name="entries_overscroll_weight">
+        <item>かなり重い</item>
+        <item>重い</item>
+        <item>普通</item>
+        <item>軽い</item>
+        <item>かなり軽い</item>
     </string-array>
 
     <string-array name="entries_trackball_colors">
@@ -133,6 +142,21 @@
     <string-array name="entries_sound_limitvol">
         <item>システム設定による減衰</item>
         <item>音楽の音量(デフォルト)</item>
+    </string-array>
+
+    <string-array name="pref_lockscreen_gestures_sensitivity_entries">
+        <item>1 (最も広い)</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12 (最も狭い)</item>
     </string-array>
 
 </resources>
