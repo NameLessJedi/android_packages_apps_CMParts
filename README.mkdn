@@ -1,9 +1,21 @@
-CMParts
-=======
+CMParts on Steroids
+===================
 
 What is CMParts?
 ----------------
 CMParts is a central location for CyanogenMod specific settings, instead of cluttering the AOSP Settings app.
+It is available [here][http://github.com/CyanogenMod/android_packages_apps_CMParts]
 
-Note - This repository has been moved to http://github.com/CyanogenMod/android_packages_apps_CMParts
+What is CMParts on Steroids
+---------------------------
+This is enhanced version of original CMParts.
+Enhancement are:
+* ability to control Swap usage (toggle that sets persist.sys.swap property - needs script in /etc/init.d)
 
+* ability to set and restore on boot CPU frequencies and governor. No matter what you set in preferences restoring will be disabled if /data/.nocpu or /sd-ext/.nocpu files exist (think about them as safety valeves". This files can be made in Recovery mode either manually or by flashing nocpu-restore.zip (provided in repo).
+
+
+Donations
+---------
+If you are thinking about donations you should first consider donating to [CyanogenMod team][http://www.cyanogenmod.com/]. Without them I'd have no code to hack on =o)
+If you want to support me feel free to click [here][https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=robert%40plukwa%2enet&lc=US&item_number=Android&currency_code=PLN&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted]

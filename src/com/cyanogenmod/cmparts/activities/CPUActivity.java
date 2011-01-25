@@ -102,6 +102,8 @@ public class CPUActivity extends PreferenceActivity implements Preference.OnPref
             File mNoCPU = new File(fileNames[i]);
             if (mNoCPU.exists()){
                 setOnBootPref.setChecked(false);
+                Toast.makeText(this, "Un-setting \"Set on boot\" cause " +fileNames[i] + " exists.",
+                        Toast.LENGTH_LONG).show();
                 try {
                     mNoCPU.delete();
                 } catch (Exception e) {
