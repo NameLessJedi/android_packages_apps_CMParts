@@ -4,7 +4,7 @@ CMParts on Steroids
 What is CMParts?
 ----------------
 CMParts is a central location for CyanogenMod specific settings, instead of cluttering the AOSP Settings app.
-It is available [here][http://github.com/CyanogenMod/android_packages_apps_CMParts]
+It is available <a href=http://github.com/CyanogenMod/android_packages_apps_CMParts>here</a>
 
 What is CMParts on Steroids
 ---------------------------
@@ -17,5 +17,6 @@ Enhancement are:
 
 Donations
 ---------
-If you are thinking about donations you should first consider donating to [CyanogenMod team][http://www.cyanogenmod.com/]. Without them I'd have no code to hack on =o)
-If you want to support me feel free to click [here][https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=robert%40plukwa%2enet&lc=US&item_number=Android&currency_code=PLN&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted]
+If you are thinking about donations you should first consider donating to <a href=http://www.cyanogenmod.com/>CyanogenMod team</a>. Without them I'd have no code to hack on =o)
+If you want to support me feel free to click <a href=https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=robert%40plukwa%2enet&lc=US&item_number=Android&currency_code=PLN&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted>here</a>
+
