@@ -33,6 +33,7 @@ public class CPUService extends Service {
 
         if (mPrefs.getBoolean(CPUActivity.SOB_PREF, false) == false) {
             Log.i(TAG, "Restore disabled by user preference.");
+            stopSelf();
             return;
         }
 
