@@ -25,6 +25,7 @@
         <receiver android:name=".intents.CPUReceiver" android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
 		<data android:scheme="file" />
 	    </intent-filter>
         </receiver>
@@ -177,5 +178,6 @@
         <service android:enabled="true" android:name=".services.RenderFXService" />
         <service android:enabled="true" android:name=".services.BatteryService" />
         <service android:enabled="true" android:name=".services.CPUService" />
+        <service android:enabled="true" android:name=".services.ShutdownService" />
     </application>
 </manifest>

@@ -2,6 +2,7 @@ package com.cyanogenmod.cmparts.activities;
 
 import com.cyanogenmod.cmparts.R;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -24,181 +25,179 @@ import java.lang.Process;
 //
 public class CPUActivity extends PreferenceActivity implements Preference.OnPreferenceChangeListener {
 
-    public static final String GOV_PREF = "pref_cpu_gov";
-    public static final String GOVERNORS_LIST_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors";
-    public static final String GOVERNOR = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor";
+	public static final String GOV_PREF = "pref_cpu_gov";
+	public static final String GOVERNORS_LIST_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors";
+	public static final String GOVERNOR = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor";
 
-    public static final String MIN_FREQ_PREF = "pref_freq_min";
-    public static final String MAX_FREQ_PREF = "pref_freq_max";
-    public static final String FREQ_LIST_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies";
-    public static final String FREQ_MAX_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq";
-    public static final String FREQ_MIN_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq";
-    public static final String SOB_PREF = "pref_set_on_boot";
-    private static final String TAG = "CPUSettings";
-    private String GOV_FMT;
-    private String MIN_FMT;
-    private String MAX_FMT;
+	public static final String MIN_FREQ_PREF = "pref_freq_min";
+	public static final String MAX_FREQ_PREF = "pref_freq_max";
+	public static final String FREQ_LIST_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies";
+	public static final String FREQ_MAX_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq";
+	public static final String FREQ_MIN_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq";
+	public static final String SOB_PREF = "pref_set_on_boot";
+	public static final String DIRTY_FLAG = "dirty_flag";
+	private static final String TAG = "CPUSettings";
+	private String GOV_FMT;
+	private String MIN_FMT;
+	private String MAX_FMT;
 
-    private ListPreference govPref;
-    private ListPreference minFreqPref;
-    private ListPreference maxFreqPref;
-    private CheckBoxPreference setOnBootPref;
+	private ListPreference govPref;
+	private ListPreference minFreqPref;
+	private ListPreference maxFreqPref;
+	private CheckBoxPreference setOnBootPref;
 
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+		GOV_FMT = getString(R.string.cpu_governors_list);
+		MIN_FMT = getString(R.string.cpu_min_freq);
+		MAX_FMT = getString(R.string.cpu_max_freq);
 
-        GOV_FMT = getString(R.string.cpu_governors_list);
-        MIN_FMT = getString(R.string.cpu_min_freq);
-        MAX_FMT = getString(R.string.cpu_max_freq);
+		String[] Governors = readOneLine(GOVERNORS_LIST_FILE).split(" ");
+		String[] FreqValues = readOneLine(FREQ_LIST_FILE).split(" ");
+		String[] Freqs;
+		String temp;
 
-        String[] Governors = readOneLine(GOVERNORS_LIST_FILE).split(" ");
-        String[] FreqValues = readOneLine(FREQ_LIST_FILE).split(" ");
-        String[] Freqs;
-        String temp;
+		Freqs = new String[FreqValues.length];
+		for (int i = 0; i < Freqs.length; i++) {
+			Freqs[i] = MHerzed(FreqValues[i]);
+		}
 
-        Freqs = new String[FreqValues.length];
-        for(int i=0; i <Freqs.length; i++) {
-            Freqs[i] = MHerzed(FreqValues[i]);
-        }
+		setTitle(R.string.cpu_title);
+		addPreferencesFromResource(R.xml.cpu_settings);
 
-        setTitle(R.string.cpu_title);
-        addPreferencesFromResource(R.xml.cpu_settings);
+		PreferenceScreen PrefScreen = getPreferenceScreen();
 
-        PreferenceScreen PrefScreen = getPreferenceScreen();
+		temp = readOneLine(GOVERNOR);
 
-        temp = readOneLine(GOVERNOR);
+		govPref = (ListPreference) PrefScreen.findPreference(GOV_PREF);
+		govPref.setEntryValues(Governors);
+		govPref.setEntries(Governors);
+		govPref.setValue(temp);
+		govPref.setSummary(String.format(GOV_FMT, temp));
+		govPref.setOnPreferenceChangeListener(this);
 
-        govPref = (ListPreference) PrefScreen.findPreference(GOV_PREF);
-        govPref.setEntryValues(Governors);
-        govPref.setEntries(Governors);
-        govPref.setValue(temp);
-        govPref.setSummary(String.format(GOV_FMT, temp));
-        govPref.setOnPreferenceChangeListener(this);
+		temp = readOneLine(FREQ_MIN_FILE);
 
-        temp = readOneLine(FREQ_MIN_FILE);
+		minFreqPref = (ListPreference) PrefScreen.findPreference(MIN_FREQ_PREF);
+		minFreqPref.setEntryValues(FreqValues);
+		minFreqPref.setEntries(Freqs);
+		minFreqPref.setValue(temp);
+		minFreqPref.setSummary(String.format(MIN_FMT, MHerzed(temp)));
+		minFreqPref.setOnPreferenceChangeListener(this);
 
-        minFreqPref = (ListPreference) PrefScreen.findPreference(MIN_FREQ_PREF);
-        minFreqPref.setEntryValues(FreqValues);
-        minFreqPref.setEntries(Freqs);
-        minFreqPref.setValue(temp);
-        minFreqPref.setSummary(String.format(MIN_FMT, MHerzed(temp)));
-        minFreqPref.setOnPreferenceChangeListener(this);
+		temp = readOneLine(FREQ_MAX_FILE);
 
-        temp = readOneLine(FREQ_MAX_FILE);
+		maxFreqPref = (ListPreference) PrefScreen.findPreference(MAX_FREQ_PREF);
+		maxFreqPref.setEntryValues(FreqValues);
+		maxFreqPref.setEntries(Freqs);
+		maxFreqPref.setValue(temp);
+		maxFreqPref.setSummary(String.format(MAX_FMT, MHerzed(temp)));
+		maxFreqPref.setOnPreferenceChangeListener(this);
 
-        maxFreqPref = (ListPreference) PrefScreen.findPreference(MAX_FREQ_PREF);
-        maxFreqPref.setEntryValues(FreqValues);
-        maxFreqPref.setEntries(Freqs);
-        maxFreqPref.setValue(temp);
-        maxFreqPref.setSummary(String.format(MAX_FMT, MHerzed(temp)));
-        maxFreqPref.setOnPreferenceChangeListener(this);
+		setOnBootPref = (CheckBoxPreference) PrefScreen.findPreference(SOB_PREF);
+		String[] fileNames = { "data/.nocpu", "/sd-ext/.nocpu" };
+		for (int i = 0; i < fileNames.length; i++) {
+			File mNoCPU = new File(fileNames[i]);
+			if (mNoCPU.exists()) {
+				setOnBootPref.setChecked(false);
+				Toast.makeText(this, "Un-setting \"Set on boot\" cause " + fileNames[i] + " exists.", Toast.LENGTH_LONG).show();
+				try {
+					mNoCPU.delete();
+				} catch (Exception e) {
+					Toast.makeText(this, "Unable to delete " + fileNames[i] + ". Please delete manualy.", Toast.LENGTH_LONG).show();
+				}
+			}
+		}
+	}
 
-        setOnBootPref = (CheckBoxPreference) PrefScreen.findPreference(SOB_PREF);
-        String[] fileNames = { "data/.nocpu", "/sd-ext/.nocpu" };
-        for(int i=0; i<fileNames.length; i++)
-        {
-            File mNoCPU = new File(fileNames[i]);
-            if (mNoCPU.exists()){
-                setOnBootPref.setChecked(false);
-                Toast.makeText(this, "Un-setting \"Set on boot\" cause " +fileNames[i] + " exists.",
-                        Toast.LENGTH_LONG).show();
-                try {
-                    mNoCPU.delete();
-                } catch (Exception e) {
-                    Toast.makeText(this,"Unable to delete " + fileNames[i] + ". Please delete manualy.",
-                            Toast.LENGTH_LONG).show();
-                }
-            }
-        }
-    }
+	@Override
+	public void onResume() {
+		String temp;
 
-    @Override
-    public void onResume() {
-        String temp;
+		super.onResume();
 
-        super.onResume();
+		temp = readOneLine(FREQ_MAX_FILE);
+		maxFreqPref.setValue(temp);
+		maxFreqPref.setSummary(String.format(MAX_FMT, MHerzed(temp)));
 
-        temp = readOneLine(FREQ_MAX_FILE);
-        maxFreqPref.setValue(temp);
-        maxFreqPref.setSummary(String.format(MAX_FMT, MHerzed(temp)));
+		temp = readOneLine(FREQ_MIN_FILE);
+		minFreqPref.setValue(temp);
+		minFreqPref.setSummary(String.format(MIN_FMT, MHerzed(temp)));
 
-        temp = readOneLine(FREQ_MIN_FILE);
-        minFreqPref.setValue(temp);
-        minFreqPref.setSummary(String.format(MIN_FMT, MHerzed(temp)));
+		temp = readOneLine(GOVERNOR);
+		govPref.setSummary(String.format(GOV_FMT, temp));
+	}
 
-        temp = readOneLine(GOVERNOR);
-        govPref.setSummary(String.format(GOV_FMT, temp));
-    }
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		String fname = "";
 
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        String fname = "";
+		if (newValue != null) {
+			preference.getEditor().putBoolean(DIRTY_FLAG, true);
+			preference.getEditor().commit();
 
-        if (newValue != null) {
-            if (preference == govPref) {
-                fname = GOVERNOR;
-            } else if (preference == minFreqPref) {
-                fname = FREQ_MIN_FILE;
-            } else if (preference == maxFreqPref) {
-                fname = FREQ_MAX_FILE;
-            }
+			if (preference == govPref) {
+				fname = GOVERNOR;
+			} else if (preference == minFreqPref) {
+				fname = FREQ_MIN_FILE;
+			} else if (preference == maxFreqPref) {
+				fname = FREQ_MAX_FILE;
+			}
+			if (writeOneLine(fname, (String) newValue)) {
+				if (preference == govPref) {
+					govPref.setSummary(String.format(GOV_FMT, (String) newValue));
+				} else if (preference == minFreqPref) {
+					minFreqPref.setSummary(String.format(MIN_FMT, MHerzed((String) newValue)));
+				} else if (preference == maxFreqPref) {
+					maxFreqPref.setSummary(String.format(MAX_FMT, MHerzed((String) newValue)));
+				}
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return false;
+	}
 
-           if (writeOneLine(fname, (String) newValue)) {
-               if (preference == govPref) {
-                   govPref.setSummary(String.format(GOV_FMT, (String) newValue));
-               } else if (preference == minFreqPref) {
-                   minFreqPref.setSummary(String.format(MIN_FMT, MHerzed((String) newValue)));
-               } else if (preference == maxFreqPref) {
-                   maxFreqPref.setSummary(String.format(MAX_FMT, MHerzed((String) newValue)));
-               }
-               return true;
-           } else {
-               return false;
-           }
-        }
-        return false;
-    }
+	public static String readOneLine(String fname) {
+		BufferedReader br;
+		String line = null;
 
-    public static String readOneLine(String fname) {
-        BufferedReader br;
-        String line = null;
+		try {
+			br = new BufferedReader(new FileReader(fname), 512);
+			try {
+				line = br.readLine();
+			} finally {
+				br.close();
+			}
+		} catch (Exception e) {
+			Log.e(TAG, "IO Exception when reading /sys/ file", e);
+		}
+		return line;
+	}
 
-        try {
-            br = new BufferedReader (new FileReader(fname), 512);
-            try {
-                line = br.readLine();
-            } finally {
-                br.close();
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "IO Exception when reading /sys/ file", e);
-        }
-        return line;
-    }
+	public static boolean writeOneLine(String fname, String value) {
+		try {
+			FileWriter fw = new FileWriter(fname);
+			try {
+				fw.write(value);
+			} finally {
+				fw.close();
+			}
+		} catch (IOException e) {
+			String Error = "Error writing to " + fname + ". Exception: ";
+			Log.e(TAG, Error, e);
+			return false;
+		}
+		return true;
+	}
 
-    public static boolean writeOneLine(String fname, String value) {
-        try {
-            FileWriter fw = new FileWriter(fname);
-            try {
-                fw.write(value);
-            } finally {
-                fw.close();
-            }
-        } catch(IOException e) {
-            String Error = "Error writing to " + fname + ". Exception: ";
-            Log.e(TAG, Error, e);
-            return false;
-        }
-        return true;
-    }
+	private String MHerzed(String str) {
+		String temp;
 
+		temp = str.substring(0, str.length() - 3);
 
-    private String MHerzed(String str) {
-        String temp;
-
-        temp = str.substring(0, str.length() - 3);
-
-        return (temp + " MHz");
-    }
+		return (temp + " MHz");
+	}
 }
