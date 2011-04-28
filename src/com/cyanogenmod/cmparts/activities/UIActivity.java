@@ -122,7 +122,7 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
         /* Overscroll Effect */
         mOverscrollPref = (ListPreference) prefSet.findPreference(OVERSCROLL_PREF);
         int overscrollEffect = Settings.System.getInt(getContentResolver(),
-                Settings.System.OVERSCROLL_EFFECT, 1);
+                Settings.System.ALLOW_OVERSCROLL, 1);
         mOverscrollPref.setValue(String.valueOf(overscrollEffect));
         mOverscrollPref.setOnPreferenceChangeListener(this);
 
@@ -193,7 +193,7 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
             return true;
         } else if (preference == mOverscrollPref) {
             int overscrollEffect = Integer.valueOf((String) newValue);
-            Settings.System.putInt(getContentResolver(), Settings.System.OVERSCROLL_EFFECT,
+            Settings.System.putInt(getContentResolver(), Settings.System.ALLOW_OVERSCROLL,
                     overscrollEffect);
             return true;
         } else if (preference == mOverscrollWeightPref) {
