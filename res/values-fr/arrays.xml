@@ -48,14 +48,6 @@
         <item>Calibré (N1) Froid</item>
     </string-array>
 
-    <string-array name="entries_overscroll_weight">
-        <item>Extra long</item>
-        <item>Long</item>
-        <item>Moyen</item>
-        <item>Court</item>
-        <item>Extra court</item>
-    </string-array>
-
     <string-array name="entries_trackball_colors">
         <item>Vert</item>
         <item>Blanc</item>
@@ -137,5 +129,25 @@
         <item>10</item>
         <item>11</item>
         <item>12 (le plus strict)</item>
+    </string-array>
+
+    <string-array name="pref_lockscreen_style_entries">
+        <item>Curseurs</item>
+        <item>Rotatif</item>
+    </string-array>
+
+    <string-array name="pref_overscroll_effect_entries">
+        <item>Aucun</item>
+        <item>Lueur</item>
+        <item>Ressort et lueur</item>
+        <item>Ressort</item>
+    </string-array>
+
+    <string-array name="entries_overscroll_weight">
+        <item>Très lourd</item>
+        <item>Lourd</item>
+        <item>Moyen</item>
+        <item>Léger</item>
+        <item>Très léger</item>
     </string-array>
 </resources>

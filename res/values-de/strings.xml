@@ -3,16 +3,46 @@
     <!-- Generic -->
     <string name="app_name">CyanogenMod</string>
 
+    <!--  Primary Screen Settings -->
+    <string name="application_settings_title_head">Anwendungen</string>
+    <string name="application_settings_title_subhead">Anwendungseinstellungen</string>
+    <string name="application_settings_summary_head">Anwendungen verschieben, Installationsort</string>
+    <string name="display_settings_title_head">Display</string>
+    <string name="display_settings_title_subhead">Display-Einstellungen</string>
+    <string name="display_settings_summary_head">Display-Animationen, Rotation, Abschaltung</string>
+    <string name="input_settings_title_head">Eingabe</string>
+    <string name="input_settings_title_subhead">Eingabe-Einstellungen</string>
+    <string name="input_settings_summary_head">Eingabeverhalten, Tasten, Haptisches Feedback</string>
+    <string name="interface_settings_title_head">Benutzeroberfläche</string>
+    <string name="interface_settings_title_subhead">Benutzeroberfläche-Einstellungen</string>
+    <string name="interface_settings_summary_head">Tweaks, Überscrollen, Render-Effekt</string>
+    <string name="lockscreen_settings_title_head">Lockscreen</string>
+    <string name="lockscreen_settings_title_subhead">Lockscreen-Einstellungen</string>
+    <string name="lockscreen_settings_summary_head">Lockscreen-Gesten, Aussehen, Entsperr-Optionen</string>
+    <string name="performance_settings_title_head">Leistung</string>
+    <string name="performance_settings_title_subhead">Leistungs-Einstellungen</string>
+    <string name="performance_settings_summary_head">Tweaks, JIT, VM Heap</string>
+    <string name="sound_settings_title_head">Klänge</string>
+    <string name="sound_settings_title_subhead">Klang-Einstellungen</string>
+    <string name="sound_settings_summary_head">Lautstärken, Audio-Focus, Ruhige Stunden</string>
+    <string name="system_settings_title_head">System</string>
+    <string name="system_settings_title_subhead">System-Einstellungen</string>
+    <string name="system_settings_summary_head">Changelog, Statistiken, Update-Benachrichtigungen</string>
+
+    <!--  Update Notifications -->
+    <string name="updatenotify_title">Update-Benachrichtigungen</string>
+    <string name="updatenotify_summary">Push-Benachrichtigungen über Updates erhalten.</string>
+
     <!-- User interface -->
     <string name="ui_title">Benutzeroberfläche</string>
     <string name="ui_summary">Einstellungen &amp; Tweaks für Benutzeroberfläche</string>
-    <string name="ui_status_bar">Anpassung der Statuszeile</string>
 
-    <!-- User interface, orientation -->
-    <string name="ui_rotation_title">Autorotation</string>
-    <string name="pref_rotation_90_title">90 Grad</string>
-    <string name="pref_rotation_180_title">180 Grad</string>
-    <string name="pref_rotation_270_title">270 Grad</string>
+    <string name="pref_electron_beam_animation_on">Einschalten animieren</string>
+    <string name="pref_electron_beam_animation_off">Ausschalten animieren</string>
+
+    <!-- User interface : 180 degree rotation -->
+    <string name="pref_rotate_180_title">Um 180 Grad drehen</string>
+    <string name="pref_rotate_180_summary">Zusätzlich Drehung um 180 Grad erlauben, wenn Autorotation eingeschaltet ist</string>
 
     <!-- User interface : LED Notifications -->
     <string name="trackball_title">LED-Benachrichtigungen</string>
@@ -25,9 +55,8 @@
 
     <!-- User interface : Overscroll -->
     <string name="ui_overscroll_title">Überscrollen</string>
-    <string name="pref_overscroll_title">Überscrollen aktivieren</string>
-    <string name="pref_overscroll_summary_on">Scrollbare Objekte überschwingen und federn zurück</string>
-    <string name="pref_overscroll_summary_off">Scrollbare Objekte überschwingen nicht</string>
+    <string name="pref_overscroll_title">Überscroll-Effekt</string>
+    <string name="pref_overscroll_summary">Effekt für das Überscrollen auswählen</string>
     <string name="pref_overscroll_weight_title">Überscroll-Stärke</string>
     <string name="pref_overscroll_weight_summary">Stärke des Überscroll-Effekts einstellen</string>
 
@@ -152,6 +181,9 @@
     <string name="trackball_reset_all">Alle Farben und Kategorien zurücksetzen.</string>
     <string name="trackball_array_error">Leider ist ein Fehler aufgetreten. Dieses Paket ist in die Kategorie \"Verschiedenes\" verschoben worden.</string>
 
+    <string name="trackball_color_notice_title">HINWEIS:</string>
+    <string name="trackball_color_notice_summary">Auf manchen Geräten sind nicht alle Farben von der LED darstellbar.</string>
+
     <!-- Trackball Settings : Warning dialog -->
     <string name="notification_battery_warning_title">WARNUNG: Kann Batterieentladung beschleunigen</string>
     <string name="notification_battery_warning">Diese Option hat sich als negativ für die Batterieladung erwiesen um ca.3% pro Stunde. Bei schnellerer Batterieentladung beim Pulsieren des Trackballs ist dies der Grund dafür. Diese Option nicht verwenden, wenn das schnellere Entladen vermieden werden soll.</string>
@@ -201,6 +233,8 @@
     <string name="pref_lockscreen_phone_messaging_control_title">Telefon und SMS/MMS</string>
     <string name="pref_lockscreen_phone_messaging_control_summary">Telefon und SMS/MMS Slider auf gesperrtem Bildschirm anzeigen.</string>
     <string name="pref_messaging_tab_app_title">SMS/MMS Slider Anwendung</string>
+    <string name="pref_lockscreen_style_title">Lockscreen-Aussehen</string>
+	  <string name="pref_lockscreen_style_summary">Einen Stil für den Lockscreen auswählen</string>
 
     <!-- Long Press Home -->
     <string name="long_press_home_title">Home-Gedrückt-Einstellungen</string>
@@ -299,6 +333,7 @@
     <string name="haptic_default_toast">Lade Standardwerte...</string>
 
     <string name="general_title">Allgemein</string>
+    <string name="buttons_title">Tasten</string>
 
     <!-- UI Settings : Power off prompt -->
     <string name="pref_power_prompt_title">Nachfragen</string>
@@ -339,6 +374,8 @@
     <string name="title_widget_buttons">Energie-Widget</string>
     <string name="title_expanded_widget">Energiesteuerung in Benachrichtigungsfeld</string>
     <string name="summary_expanded_widget">Tasten für Energiesteuerung in aufgeklappter Benachrichtigungsanzeige</string>
+    <string name="title_expanded_hide_onchange">Nach Änderung verbergen</string>
+    <string name="summary_expanded_hide_onchange">Die Benachrichtigungsanzeige sofort wieder verbergen, nachdem eine Änderung an der Energiesteuerung vorgenommen wurde.</string>
     <string name="expanded_color_mask">Farbe der Anzeige</string>
     <string name="title_widget_picker">Anzuzeigende Tasten</string>
     <string name="summary_widget_picker">Tasten auswählen, die angezeigt werden sollen.</string>
@@ -423,6 +460,8 @@
     <string name="sound_summary">Einstellungen für Klang und Audio-Fokus</string>
     <string name="sound_notifications_focus_title">Benachrichtigung betonen</string>
     <string name="sound_notifications_focus_summary">Verringert die Lautstärke kompatibler Apps um die Benachrichtigung deutlicher hörbar zu machen</string>
+    <string name="sound_volume_control_silent_title">Absolute Ruhe</string>
+    <string name="sound_volume_control_silent_summary">Der Lautstärkeregelung einen Zustand für absolute Ruhe hinzufügen.</string>
     <string name="sound_to_speaker_title">Immer über Lautsprecher</string>
     <string name="sound_notifications_title">Benachrichtigungen</string>
     <string name="sound_rings_title">Klingeltöne</string>
@@ -491,4 +530,12 @@
     <string name="pref_lockscreen_disable_unlock_tab">Entsperr Slider verbergen</string>
     <string name="pref_lockscreen_disable_unlock_tab_summary">Hinweis: Es muss Trackball-, MENÜ- oder Gesten-Entsperren aktiviert sein bevor diese Option möglich ist</string>
     <string name="gestures_explain_create_screen">Aktion (oder Entsperren/Klingelton) auswählen und eine Geste auf den Bildschirm zeichnen.</string>
+
+    <!-- Change Log strings -->
+    <string name="changelog_title">Changelog ansehen</string>
+    <string name="changelog_dialog">Changelog</string>
+    <string name="changelog_loading">Lade Changelog...</string>
+    <string name="changelog_error">Fehler beim Laden des Changelogs...</string>
+    <string name="changelog_unknown">Unbekannt</string>
+    <string name="changelog_version">Version</string>
 </resources>

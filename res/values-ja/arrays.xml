@@ -49,14 +49,6 @@
         <item>調整済み(N1) Cold</item>
     </string-array>
 
-    <string-array name="entries_overscroll_weight">
-        <item>かなり重い</item>
-        <item>重い</item>
-        <item>普通</item>
-        <item>軽い</item>
-        <item>かなり軽い</item>
-    </string-array>
-
     <string-array name="entries_trackball_colors">
         <item>緑</item>
         <item>白</item>
@@ -69,6 +61,12 @@
         <item>オレンジ</item>
         <item>ライトブルー</item>
         <item>ランダム</item>
+        <item>なし</item>
+    </string-array>
+
+    <string-array name="entries_dual_led_colors">
+        <item>緑</item>
+        <item>アンバー</item>
         <item>なし</item>
     </string-array>
 
@@ -157,6 +155,26 @@
         <item>10</item>
         <item>11</item>
         <item>12 (最も狭い)</item>
+    </string-array>
+
+    <string-array name="pref_lockscreen_style_entries">
+        <item>スライディングタブ</item>
+        <item>ロータリー</item>
+    </string-array>
+
+    <string-array name="pref_overscroll_effect_entries">
+        <item>なし</item>
+        <item>エッジを光らせる</item>
+        <item>跳ね返って光る</item>
+        <item>跳ね返る</item>
+    </string-array>
+
+    <string-array name="entries_overscroll_weight">
+        <item>とても重い</item>
+        <item>重い</item>
+        <item>中ぐらい</item>
+        <item>軽い</item>
+        <item>とても軽い</item>
     </string-array>
 
 </resources>

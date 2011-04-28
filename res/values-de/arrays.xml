@@ -36,6 +36,13 @@
     <item>Kalibriert (N1) Kalt</item>
   </string-array>
 
+  <string-array name="pref_overscroll_effect_entries">
+    <item>Kein</item>
+    <item>Glimmende Kante</item>
+    <item>Prallen und Glimmen</item>
+    <item>Nur prallen</item>
+  </string-array>
+
   <string-array name="entries_overscroll_weight">
     <item>Sehr stark</item>
     <item>Stark</item>
@@ -163,7 +170,7 @@
     <item>Musik-Lautstärke (Standard)</item>
   </string-array>
 
-  <string-array name="entries_brightness_widget">
+  <string-array name="entries_brightness_widget" formatted="false">
     <item>Auto/Dunkel/40%/100%</item>
     <item>Auto/Dunkel/25%/75%/100%</item>
     <item>Auto/25%/100%</item>
@@ -208,4 +215,10 @@
     <item>11</item>
     <item>12 (genau)</item>
   </string-array>
+
+  <string-array name="pref_lockscreen_style_entries">
+	  <item>Tabs zum Schieben</item>
+	  <item>Rotierend</item>
+	</string-array>
+
 </resources>

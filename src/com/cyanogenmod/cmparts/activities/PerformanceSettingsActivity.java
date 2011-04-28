@@ -10,6 +10,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
@@ -33,6 +34,8 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
     private static final String SWAP_PREF = "pref_swap";
 
     private static final int SWAP_DEFAULT = SystemProperties.getInt("ro.swap.default", -1);
+
+    private static final String GENERAL_CATEGORY = "general_category";
 
     private static final String JIT_PREF = "pref_jit_mode";
 
@@ -64,7 +67,7 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
 
     private static final int LOCK_HOME_DEFAULT = 0;
 
-    private static final int LOCK_MMS_DEFAULT = 1;
+    private static final int LOCK_MMS_DEFAULT = 0;
 
     private PreferenceScreen mCPUScreen;
 
@@ -92,10 +95,12 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setTitle(R.string.performance_settings_title);
+        setTitle(R.string.performance_settings_title_subhead);
         addPreferencesFromResource(R.xml.performance_settings);
 
         PreferenceScreen prefSet = getPreferenceScreen();
+        
+        PreferenceCategory generalCategory = (PreferenceCategory)prefSet.findPreference(GENERAL_CATEGORY);
 
         mCPUScreen = (PreferenceScreen) prefSet.findPreference(CPU_SCREEN);
         
@@ -114,8 +119,8 @@ public class PerformanceSettingsActivity extends PreferenceActivity implements P
                 default: mSwapPref.setChecked(true);
             } 
         } else {
-            prefSet.removePreference(mCompcachePref);
-            prefSet.removePreference(mSwapPref);
+            generalCategory.removePreference(mSwapPref);
+            generalCategory.removePreference(mCompcachePref);
         }
 
         mJitPref = (CheckBoxPreference) prefSet.findPreference(JIT_PREF);

@@ -3,18 +3,50 @@
     <!-- Generic -->
     <string name="app_name">Impostazioni CyanogenMod</string>
 
+    <!--  Primary Screen Settings -->
+    <string name="application_settings_title_head">Applicazioni</string>
+    <string name="application_settings_title_subhead">Impostazioni applicazioni</string>
+    <string name="application_settings_summary_head">Spostamento applicazioni, luogo di installazione</string>
+    <string name="display_settings_title_head">Display</string>
+    <string name="display_settings_title_subhead">Impostazioni display</string>
+    <string name="display_settings_summary_head">Animazioni display, rotazione, timeout</string>
+    <string name="input_settings_title_head">Input</string>
+    <string name="input_settings_title_subhead">Impostazioni input</string>
+    <string name="input_settings_summary_head">Gestione input, tasti, feedback aptico</string>
+    <string name="interface_settings_title_head">Interfaccia</string>
+    <string name="interface_settings_title_subhead">Impostazioni interfaccia</string>
+    <string name="interface_settings_summary_head">Modifiche interfaccia, overscrolling, effetto render</string>
+    <string name="lockscreen_settings_title_head">Lockscreen</string>
+    <string name="lockscreen_settings_title_subhead">Impostazioni lockscreen</string>
+    <string name="lockscreen_settings_summary_head">Gesture nel lockscreen, stile, opzioni di sblocco</string>
+    <string name="performance_settings_title_head">Performance</string>
+    <string name="performance_settings_title_subhead">Impostazioni performance</string>
+    <string name="performance_settings_summary_head">Modifiche performance, JIT, dimensione heap VM</string>
+    <string name="sound_settings_title_head">Audio</string>
+    <string name="sound_settings_title_subhead">Impostazioni audio</string>
+    <string name="sound_settings_summary_head">Volume audio, audio focus, ore di quiete</string>
+    <string name="system_settings_title_head">Sistema</string>
+    <string name="system_settings_title_subhead">Impostazioni di sistema</string>
+    <string name="system_settings_summary_head">Changelog sistema, statistiche, notifiche aggiornamenti</string>
+
+    <!--  Update Notifications -->
+    <string name="updatenotify_title">Notifiche Aggiornamenti</string>
+    <string name="updatenotify_summary">Ricevi notifiche per gli aggiornamenti.</string>
+
     <!-- User interface -->
     <string name="ui_title">Interfaccia utente</string>
     <string name="ui_summary">Impostazioni e modifiche interfaccia utente</string>
     <string name="ui_status_bar">Personalizzazione Status Bar</string>
 
-    <!-- User interface : orientation -->
-    <string name="ui_rotation_title">Rotazione accelerometro</string>
-    <string name="pref_rotation_90_title">90 gradi</string>
-    <string name="pref_rotation_180_title">180 gradi</string>
-    <string name="pref_rotation_270_title">270 gradi</string>
+    <string name="pref_electron_beam_animation_on">Animazione accensione schermo</string>
+    <string name="pref_electron_beam_animation_off">Animazione spegnimento schermo</string>
 
-    <!-- User interface : trackball -->
+    <!-- User interface : 180 degree rotation -->
+    <string name="pref_rotate_180_title">Rotazione 180 gradi</string>
+    <string name="pref_rotate_180_summary">Permette una rotazione di 180 gradi se la rotazione automatica è attiva</string>
+
+
+    <!-- User interface : LED Notifications -->
     <string name="trackball_title">Notifiche LED</string>
     <string name="trackball_summary">Imposta colore e pulsazione delle notifiche trackball/LED</string>
 
@@ -25,11 +57,10 @@
 
     <!-- User interface : Overscroll -->
     <string name="ui_overscroll_title">Overscrolling</string>
-    <string name="pref_overscroll_title">Attiva overscrolling</string>
-    <string name="pref_overscroll_summary_on">Effetto di rimbalzo per elementi scorrevoli</string>
-    <string name="pref_overscroll_summary_off">Nessun effetto di rimbalzo per elementi scorrevoli</string>
-    <string name="pref_overscroll_weight_title">Misura overscrolling</string>
-    <string name="pref_overscroll_weight_summary">Seleziona l\'entità dell\'effetto di rimbalzo</string>
+    <string name="pref_overscroll_title">Effetto overscrolling</string>
+    <string name="pref_overscroll_summary">Scegli che effetto utilizzare per gli elementi scorrevoli</string>
+    <string name="pref_overscroll_weight_title">Peso overscrolling</string>
+    <string name="pref_overscroll_weight_summary">Seleziona il peso degli elementi scorrevoli</string>
 
     <!-- User interface : Lock Screen -->
         <string name="ui_lockscreen_title">Impostazioni Lockscreen</string>
@@ -152,7 +183,7 @@
     <string name="trackball_reset_all">Ripristina le app e le categorie</string>
     <string name="trackball_array_error">Purtroppo si è verificato un errore di array. Questa app è stata forzata nella categoria Miscellaneous.</string>
     <string name="trackball_color_notice_title">NOTA:</string>
-    <string name="trackball_color_notice_summary">Non tutti i colori verranno visualizzati su tutti i dispositivi.</string>
+    <string name="trackball_color_notice_summary">Alcuni dispositivi non sono in grado di visualizzare tutti i colori disponibili.</string>
 
     <!-- Trackball Settings : Warning dialog -->
     <string name="notification_battery_warning_title">ATTENZIONE:Aumento consumo di batteria</string>
@@ -203,6 +234,8 @@
     <string name="pref_lockscreen_phone_messaging_control_title">Telefono e Messaggi</string>
     <string name="pref_lockscreen_phone_messaging_control_summary">Applicazioni Telefono e Messaggi accessibili dal lockscreen.</string>
     <string name="pref_messaging_tab_app_title">Applicazione messaggi</string>
+    <string name="pref_lockscreen_style_title">Stile lockscreen</string>
+    <string name="pref_lockscreen_style_summary">Scegli lo stile del lockscreen</string>
 
     <!-- Long Press Home -->
     <string name="long_press_home_title">Long-press tasto home</string>
@@ -239,6 +272,14 @@
     <!-- Performance Settings : Warning dialog -->
     <string name="performance_settings_warning_title">WARNING: Dragons Ahead!</string>
     <string name="performance_settings_warning">Queste opzioni modificheranno le performance del dispositivo, probabilmente anche peggiorandole. Sono incluse per sperimentazione e ti chiediamo di non inviare bug report se hai modificato i valori di default.</string>
+
+    <!-- Performance : Lock home memory -->
+    <string name="pref_lock_home_title">Forza home in memoria</string>
+    <string name="pref_lock_home_summary">Cerca di mantenere l\'applicazione home sempre in memoria</string>
+
+    <!-- Performance : Lock mms app in memory -->
+    <string name="pref_lock_mms_title">Forza app messaggi in memoria</string>
+    <string name="pref_lock_mms_summary">Attiva per non rischiare di perdere messaggi in entrata in condizioni di poca memoria disponibile</string>
 
     <!-- Application Settings -->
     <string name="application_settings_title">Impostazioni applicazioni</string>
@@ -378,13 +419,7 @@
 
 
 
-    <!-- Performance : Lock home memory -->
-    <string name="pref_lock_home_title">Forza home in memoria</string>
-    <string name="pref_lock_home_summary">Cerca di mantenere l\'applicazione home sempre in memoria</string>
 
-    <!-- Performance : Lock mms app in memory -->
-    <string name="pref_lock_mms_title">Forza app messaggi in memoria</string>
-    <string name="pref_lock_mms_summary">Attiva per non rischiare di perdere messaggi in entrata in condizioni di poca memoria disponibile</string>
 
     <!-- Backlight -->
     <string name="backlight_title">Retroilluminazione Automatica</string>
@@ -431,6 +466,8 @@
     <string name="sound_summary">Impostazioni audio e audio focus</string>
     <string name="sound_notifications_focus_title">Focus Notifiche</string>
     <string name="sound_notifications_focus_summary">L\'Audio focus fa in modo che durante una notifica venga diminuito il volume delle app compatibili.</string>
+    <string name="sound_volume_control_silent_title">Stato silenzioso</string>
+    <string name="sound_volume_control_silent_summary">Aggiungi uno stato completamente silenzioso al controllo volume</string>
     <string name="sound_to_speaker_title">Riproduci solo tramite speaker</string>
     <string name="sound_notifications_title">Notifiche</string>
     <string name="sound_rings_title">Suonerie</string>
@@ -498,4 +535,12 @@
     <string name="pref_lockscreen_disable_unlock_tab">Disattiva slider di sblocco</string>
     <string name="pref_lockscreen_disable_unlock_tab_summary">Nota: Perchè quest\'opzione sia disponibile devi aver prima abilitato lo sblocco tramite trackball, tasto menu o gesture</string>
     <string name="gestures_explain_create_screen">Scegli un\'azione da eseguire (oppure seleziona Sblocco o Int. audio) e disegna una gesture sullo schermo.</string>
+
+    <!-- Change Log strings -->
+    <string name="changelog_title">Visualizza changelog</string>
+    <string name="changelog_dialog">Changelog</string>
+    <string name="changelog_loading">Caricamento changelog...</string>
+    <string name="changelog_error">Errore nel caricare il changelog...</string>
+    <string name="changelog_unknown">Sconosciuto</string>
+    <string name="changelog_version">Versione</string>
 </resources>

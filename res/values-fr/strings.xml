@@ -3,16 +3,21 @@
     <!-- Generic -->
     <string name="app_name">Paramètres CyanogenMod</string>
 
+    <!-- Update Notifications -->
+    <string name="updatenotify_title">Notifications de mise à jour</string>
+    <string name="updatenotify_summary">Recevoir une notification push lorsqu\'une mise à jour est disponible</string>
+
     <!-- User interface -->
     <string name="ui_title">Interface utilisateur</string>
     <string name="ui_summary">Paramètres de l\'interface utilisateur &amp; tweaks</string>
     <string name="ui_status_bar">Personalisation de la barre de statut</string>
 
-    <!-- User interface : orientation -->
-    <string name="ui_rotation_title">Rotation automatique</string>
-    <string name="pref_rotation_90_title">90 degrés</string>
-    <string name="pref_rotation_180_title">180 degrés</string>
-    <string name="pref_rotation_270_title">270 degrés</string>
+    <string name="pref_electron_beam_animation_on">Animation allumage écran</string>
+    <string name="pref_electron_beam_animation_off">Animation extinction écran</string>
+
+    <!-- User interface : 180 degree rotation -->
+    <string name="pref_rotate_180_title">Rotation à 180°</string>
+    <string name="pref_rotate_180_summary">Autoriser la rotation de l\'écran à 180° lorsque la rotation automatique est activée</string>
 
     <!-- User interface : LED Notifications -->
     <string name="trackball_title">Notifications par LED</string>
@@ -25,11 +30,10 @@
 
     <!-- User interface : Overscroll -->
     <string name="ui_overscroll_title">Surdéfilement</string>
-    <string name="pref_overscroll_title">Activer surdéfilement</string>
-    <string name="pref_overscroll_summary_on">Les objets défilants s\'arrêteront en bout de course en imitant un effet de ressort</string>
-    <string name="pref_overscroll_summary_off">Les objets défilants s\'arrêteront brutalement en bout de course</string>
-    <string name="pref_overscroll_weight_title">Longueur surdéfilement</string>
-    <string name="pref_overscroll_weight_summary">Choisir la longueur de l\'effet ressort</string>
+    <string name="pref_overscroll_title">Effet surdéfilement</string>
+    <string name="pref_overscroll_summary">Choisir l\'apparence de l\'effet de surdéfilement</string>
+    <string name="pref_overscroll_weight_title">Poids objets défilants</string>
+    <string name="pref_overscroll_weight_summary">Choisir le poids des objets défilants</string>
 
     <!-- User interface : Lock Screen -->
     <string name="ui_lockscreen_title">Paramètres de l\'écran de verrouillage</string>
@@ -203,6 +207,8 @@
     <string name="pref_lockscreen_phone_messaging_control_title">Téléphone et messages</string>
     <string name="pref_lockscreen_phone_messaging_control_summary">Le téléphone ainsi que les messages seront accessibles depuis l\'écran de verrouillage</string>
     <string name="pref_messaging_tab_app_title">Application de messagerie</string>
+    <string name="pref_lockscreen_style_title">Style de l\'écran de verrouillage</string>
+    <string name="pref_lockscreen_style_summary">Choisir le style de l\'écran de verrouillage</string>
 
     <!-- Long Press Home -->
     <string name="long_press_home_title">Pression longue sur maison</string>
@@ -357,7 +363,7 @@
     <string name="title_toggle_mobiledata">Données mobiles</string>
     <string name="title_toggle_lockscreen">Écran de verrouillage</string>
     <string name="title_toggle_networkmode">2G/3G</string>
-    <string name="title_toggle_autorotate">Rotation automatique</string>
+    <string name="title_toggle_autorotate">Auto-rotation</string>
     <string name="title_toggle_airplane">Mode avion</string>
     <string name="title_toggle_flashlight">Lampe de poche LED</string>
     <string name="title_toggle_sleep">Mise en veille</string>

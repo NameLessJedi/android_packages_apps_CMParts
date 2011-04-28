@@ -50,14 +50,6 @@
 	    <item>Calibrato (N1) Cool</item>
 	</string-array>
 
-    <string-array name="entries_overscroll_weight">
-        <item>Molto forte</item>
-        <item>Forte</item>
-        <item>Medio</item>
-        <item>Debole</item>
-        <item>Molto debole</item>
-        </string-array>
-
     <string-array name="entries_trackball_colors">
         <item>Verde</item>
         <item>Bianco</item>
@@ -137,7 +129,7 @@
         <item>Volume musica (default)</item>
     </string-array>
 
-<string-array name="entries_brightness_widget">
+    <string-array name="entries_brightness_widget" formatted="false">
         <item>Auto/Debole/40%/100%</item>
         <item>Auto/Debole/25%/75%/100%</item>
         <item>Auto/25%/100%</item>
@@ -177,4 +169,25 @@
         <item>11</item>
         <item>12 (Preciso)</item>
     </string-array>
+
+    <string-array name="pref_lockscreen_style_entries">
+        <item>Tab scorrevoli</item>
+        <item>Rotante</item>
+    </string-array>
+
+    <string-array name="pref_overscroll_effect_entries">
+        <item>Nessuno</item>
+        <item>Bagliore</item>
+        <item>Rimbalzo e bagliore</item>
+        <item>Rimbalzo</item>
+    </string-array>
+
+    <string-array name="entries_overscroll_weight">
+        <item>Molto pesante</item>
+        <item>Pesante</item>
+        <item>Medio</item>
+        <item>Leggero</item>
+        <item>Molto leggero</item>
+    </string-array>
+
 </resources>
