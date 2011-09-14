@@ -73,13 +73,6 @@
                 <category android:name="com.cyanogenmod.cmparts.SHORTCUT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SystemActivity"
-            android:label="@string/system_settings_title_head">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.cyanogenmod.cmparts.SHORTCUT" />
-            </intent-filter>
-        </activity>
         <activity android:name=".activities.LongPressHomeActivity"
             android:label="@string/long_press_home_title">
             <intent-filter>

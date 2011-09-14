@@ -539,8 +539,5 @@
     <string name="sound_settings_title_head">소리</string>
     <string name="sound_settings_title_subhead">소리 설정</string>
     <string name="sound_settings_summary_head">소리 크기, 소리 집중, 조용한 시간</string>
-    <string name="system_settings_title_head">시스템</string>
-    <string name="system_settings_title_subhead">시스템 설정</string>
-    <string name="system_settings_summary_head">시스템 변경 내역, 상태, 업데이트 알림</string>
 
 </resources>

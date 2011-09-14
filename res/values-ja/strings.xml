@@ -25,9 +25,6 @@
     <string name="sound_settings_title_head">サウンド</string>
     <string name="sound_settings_title_subhead">サウンド設定</string>
     <string name="sound_settings_summary_head">音量, オーディオフォーカス, 静寂時間</string>
-    <string name="system_settings_title_head">システム</string>
-    <string name="system_settings_title_subhead">システム設定</string>
-    <string name="system_settings_summary_head">システム更新履歴, ステータス, 更新通知</string>
 
     <!--  Update Notifications -->
     <string name="updatenotify_title">更新通知</string>

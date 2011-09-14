@@ -25,9 +25,6 @@
     <string name="sound_settings_title_head">Audio</string>
     <string name="sound_settings_title_subhead">Impostazioni audio</string>
     <string name="sound_settings_summary_head">Volume audio, audio focus, ore di quiete</string>
-    <string name="system_settings_title_head">Sistema</string>
-    <string name="system_settings_title_subhead">Impostazioni di sistema</string>
-    <string name="system_settings_summary_head">Changelog sistema, statistiche, notifiche aggiornamenti</string>
 
     <!--  Update Notifications -->
     <string name="updatenotify_title">Notifiche Aggiornamenti</string>
