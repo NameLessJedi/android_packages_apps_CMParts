@@ -27,8 +27,6 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
 
     private static final String NOTIFICATION_TRACKBALL = "trackball_notifications";
 
-    private static final String EXTRAS_SCREEN = "tweaks_extras";
-
     private static final String GENERAL_CATEGORY = "general_category";
 
     private static final String UI_EXP_WIDGET = "expanded_widget";
@@ -44,8 +42,6 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
     private PreferenceScreen mNotificationScreen;
 
     private PreferenceScreen mTrackballScreen;;
-
-    private PreferenceScreen mExtrasScreen;
 
     /* Other */
     private static final String PINCH_REFLOW_PREF = "pref_pinch_reflow";
@@ -88,7 +84,6 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
         /* Preference Screens */
         mNotificationScreen = (PreferenceScreen) prefSet.findPreference(NOTIFICATION_SCREEN);
         mTrackballScreen = (PreferenceScreen) prefSet.findPreference(NOTIFICATION_TRACKBALL);
-        mExtrasScreen = (PreferenceScreen) prefSet.findPreference(EXTRAS_SCREEN);
 
         if (!getResources().getBoolean(R.bool.has_rgb_notification_led)
                 && !getResources().getBoolean(R.bool.has_dual_notification_led)) {
@@ -146,9 +141,6 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
         }
         if (preference == mTrackballScreen) {
             startActivity(mTrackballScreen.getIntent());
-        }
-        if (preference == mExtrasScreen) {
-            startActivity(mExtrasScreen.getIntent());
         }
         if (preference == mPowerPicker) {
             startActivity(mPowerPicker.getIntent());
