@@ -3,6 +3,33 @@
     <!-- Generic -->
     <string name="app_name">Zaawansowane</string>
 
+    <!-- Primary Screen Settings -->
+    <string name="application_settings_title_head">Aplikacje</string>
+    <string name="application_settings_title_subhead">Ustawienia aplikacji</string>
+    <string name="application_settings_summary_head">Przenoszenie aplikacji, miejsce instalacji, filtrowanie połączeń</string>
+    <string name="display_settings_title_head">Wyświetlacz</string>
+    <string name="display_settings_title_subhead">Ustawienia wyświetlacza</string>
+    <string name="display_settings_summary_head">Animacje, obrót ekranu, podświetlenie</string>
+    <string name="input_settings_title_head">Wprowadzanie</string>
+    <string name="input_settings_title_subhead">Ustawienia wprowadzania</string>
+    <string name="input_settings_summary_head">Przyciski, reakcja na dotyk</string>
+    <string name="interface_settings_title_head">Interfejs</string>
+    <string name="interface_settings_title_subhead">Ustawienia interfejsu</string>
+    <string name="interface_settings_summary_head">Usprawnienia, przewijanie, render effect</string>
+    <string name="lockscreen_settings_title_head">Blokada ekranu</string>
+    <string name="lockscreen_settings_title_subhead">Ustawienia blokady ekranu</string>
+    <string name="lockscreen_settings_summary_head">Gesty, styl, opcje odblokowania</string>
+    <string name="performance_settings_title_head">Wydajność</string>
+    <string name="performance_settings_title_subhead">Ustawienia wydajności</string>
+    <string name="performance_settings_summary_head">Usprawnienia, JIT, VM heap size</string>
+    <string name="sound_settings_title_head">Dźwięk</string>
+    <string name="sound_settings_title_subhead">Ustawienia dźwięku</string>
+    <string name="sound_settings_summary_head">Głośność, ciche godziny</string>
+
+    <!-- Display interface -->
+    <string name="pref_rotate_180_title">Obrót o 180 stopni</string>
+    <string name="pref_rotate_180_summary">Zezwala na obrócenie o 180 stopni przy aktywnym autoobracaniu ekranu.</string>
+
     <!-- User interface -->
     <string name="ui_title">Interfejs użytkownika</string>
     <string name="ui_summary">Ustawienia interfejsu i usprawnienia</string>
@@ -29,6 +56,13 @@
     <string name="pref_lockscreen_screenoff_lock_delay">Czas do zablokowania</string>
     <string name="pref_lockscreen_timeout_lock_delay_summary">Ile czasu minie przed wygaszeniem ekranu</string>
     <string name="pref_lockscreen_screenoff_lock_delay_summary">Ile czasu minie przed zablokowaniem ekranu</string>
+
+    <!-- Status Bar, Battery -->
+    <string name="battery_title">Bateria</string>
+    <string name="pref_battery_percentage_title">Procentowy stan baterii</string>
+    <string name="pref_battery_percentage_summary">Pokaż procentowy stan baterii na ikonie w pasku</string>
+    <string name="battery_status_color_title">Wybór koloru</string>
+
 
     <!-- Color Picker -->
     <string name="title_color_picker">Wybierz kolor</string>
@@ -313,6 +347,8 @@
     <string name="sound_summary">Ustawienia dźwięku i skupienia</string>
     <string name="sound_notifications_focus_title">Skupienie na powiadomieniach</string>
     <string name="sound_notifications_focus_summary">Powoduje ściszenie dźwięków aplikacji podczas powiadomienia.</string>
+    <string name="sound_volume_control_silent_title">Profil cichy</string>
+    <string name="sound_volume_control_silent_summary">Dodaje profil całkowitego wyciszenia do sterowania głośnością</string>
     <string name="sound_to_speaker_title">Odtwarzaj zawsze na głośniku</string>
     <string name="sound_notifications_title">Powiadomienia</string>
     <string name="sound_rings_title">Nadchodzące połączenie</string>

@@ -54,6 +54,10 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
 
     private static final String OVERSCROLL_WEIGHT_PREF = "pref_overscroll_weight";
 
+    private static final String BATTERY_PERCENTAGE_PREF = "pref_battery_percentage";
+
+    private static final String UI_BATTERY_PERCENT_COLOR = "battery_status_color_title";
+
     private CheckBoxPreference mPinchReflowPref;
 
     private CheckBoxPreference mPowerPromptPref;
@@ -71,6 +75,10 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
     private ListPreference mOverscrollPref;
 
     private ListPreference mOverscrollWeightPref;
+
+    private CheckBoxPreference mBatteryPercentagePref;
+
+    private Preference mBatteryPercentColorPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,6 +108,14 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
         mRenderEffectPref = (ListPreference) prefSet.findPreference(RENDER_EFFECT_PREF);
         mRenderEffectPref.setOnPreferenceChangeListener(this);
         updateFlingerOptions();
+
+        /* Battery Percentage */
+        mBatteryPercentagePref = (CheckBoxPreference) prefSet.findPreference(BATTERY_PERCENTAGE_PREF);
+        mBatteryPercentagePref.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.BATTERY_PERCENTAGE_STATUS_ICON, 0) == 1);
+
+        /* Battery Percentage Color */
+        mBatteryPercentColorPreference = prefSet.findPreference(UI_BATTERY_PERCENT_COLOR);
 
         /* Expanded View Power Widget */
         mPowerWidget = (CheckBoxPreference) prefSet.findPreference(UI_EXP_WIDGET);
@@ -144,6 +160,18 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
         }
         if (preference == mPowerPicker) {
             startActivity(mPowerPicker.getIntent());
+        }
+
+        if (preference == mBatteryPercentagePref) {
+            value = mBatteryPercentagePref.isChecked();
+            Settings.System.putInt(getContentResolver(), Settings.System.BATTERY_PERCENTAGE_STATUS_ICON,
+                    value ? 1 : 0);
+        }
+
+        if (preference == mBatteryPercentColorPreference) {
+            ColorPickerDialog cp = new ColorPickerDialog(this, mBatteryPercentColorListener,
+                    readWidgetColor());
+            cp.show();
         }
 
         if (preference == mPinchReflowPref) {
@@ -255,6 +283,16 @@ public class UIActivity extends PreferenceActivity implements OnPreferenceChange
         public void colorChanged(int color) {
             Settings.System.putInt(getContentResolver(),
                     Settings.System.EXPANDED_VIEW_WIDGET_COLOR, color);
+        }
+
+        public void colorUpdate(int color) {
+        }
+    };
+
+    ColorPickerDialog.OnColorChangedListener mBatteryPercentColorListener = new ColorPickerDialog.OnColorChangedListener() {
+        public void colorChanged(int color) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.BATTERY_PERCENTAGE_STATUS_COLOR, color);
         }
 
         public void colorUpdate(int color) {

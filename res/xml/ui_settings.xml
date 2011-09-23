@@ -27,6 +27,15 @@
             android:entries="@array/entries_render_effect"
             android:entryValues="@array/values_render_effect" />
 
+        <!-- Battery Percentage -->
+        <CheckBoxPreference android:key="pref_battery_percentage"
+            android:title="@string/pref_battery_percentage_title"
+            android:summary="@string/pref_battery_percentage_summary" />
+        <Preference android:key="battery_status_color_title"
+            android:title="@string/battery_status_color_title"
+            android:defaultValue="-1"
+            android:dependency="pref_battery_percentage" />
+
     </PreferenceCategory>
 
     <!-- Expanded View Power Widget -->
