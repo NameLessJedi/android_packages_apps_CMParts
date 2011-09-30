@@ -139,6 +139,9 @@
   <string name="pref_lockscreen_music_controls_summary">Mostra els controls de música a la pantalla de bloqueig</string>
   <string name="pref_lockscreen_always_music_controls_title">Mostra sempre els controls de música</string>
   <string name="pref_lockscreen_always_music_controls_summary">Mostra els controls de la música sense tenir en compte si es reprodueix música o no</string>
+  <string name="pref_lockscreen_custom_app_toggle_title">Iniciador personalitzat d\'aplicació</string>
+  <string name="pref_lockscreen_custom_app_toggle_summary">Mostra un segon desplaçable en l\'estil lliscant, i mostra un clotet d\'aplicació personalitzada en l\'estil rotatori</string>
+  <string name="pref_lockscreen_custom_app_activity_title">Aplicació personalitzada</string>
   <string name="pref_trackball_wake_title">La bola desperta</string>
   <string name="pref_trackball_wake_summary">Pressionant la bola de desplaçament es desperta el dispositiu</string>
   <string name="pref_trackball_unlock_title">La bola desbloqueja</string>

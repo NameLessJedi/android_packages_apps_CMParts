@@ -191,9 +191,9 @@
     <string name="pref_menu_unlock_summary">Нажатие на Menu разблокирует устройство</string>
     <string name="pref_lockscreen_quick_unlock_control_title">Быстрая разблокировка</string>
     <string name="pref_lockscreen_quick_unlock_control_summary">Не требуется нажимать подтверждение после ввода пароля или PIN.</string>
-    <string name="pref_lockscreen_phone_messaging_control_title">Телефон и SMS</string>
-    <string name="pref_lockscreen_phone_messaging_control_summary">Телефон и SMS доступны с экрана блокировки.</string>
-    <string name="pref_messaging_tab_app_title">Приложение для SMS</string>
+    <string name="pref_lockscreen_custom_app_toggle_title">Запуск приложения пользователя</string>
+    <string name="pref_lockscreen_custom_app_toggle_summary">Добавить второй ползунок (для стиля Ползунок), приложение пользователя (для стиля Вращение) или третье кольцо (для стиля Кольца)</string>
+    <string name="pref_lockscreen_custom_app_activity_title">Выбрать приложение</string>
 
     <!-- Long Press Home -->
     <string name="long_press_home_title">Долгое нажатие на Home</string>

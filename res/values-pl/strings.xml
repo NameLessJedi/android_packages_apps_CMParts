@@ -119,6 +119,8 @@
     <string name="input_settings_summary">Zachowanie przycisku</string>
     <string name="button_settings_title">Ustawienia przycisku</string>
     <string name="lockscreen_settings_title">Ustawienia ekranu blokady</string>
+    <string name="pref_lockscreen_always_battery_title">Stan baterii</string>
+    <string name="pref_lockscreen_always_battery_summary">Wyświetlaj stan baterii na ekranie blokady przez cały czas</string>
     <string name="pref_lockscreen_music_controls_title">Sterowanie muzyką</string>
     <string name="pref_lockscreen_music_controls_summary">Wyświetla sterowanie muzyką na ekranie blokady</string>
     <string name="pref_lockscreen_always_music_controls_title">Zawsze wyświetlaj sterowanie muzyką</string>
@@ -131,9 +133,9 @@
     <string name="pref_menu_unlock_summary">Wciśnięcie przycisku menu wyłącza blokadę ekranu.</string>
     <string name="pref_lockscreen_quick_unlock_control_title">Szybkie odblokowanie</string>
     <string name="pref_lockscreen_quick_unlock_control_summary">Nie trzeba wciskać OK podczas wprowadzania pinu lub hasła. Usuwanie traktowane jest jako nieudana próba.</string>
-    <string name="pref_lockscreen_phone_messaging_control_title">Telefon i wiadomości</string>
-    <string name="pref_lockscreen_phone_messaging_control_summary">Telefon i wiadomości są dostępne na ekranie blokady.</string>
-    <string name="pref_messaging_tab_app_title">Aplikacja wiadomości</string>
+    <string name="pref_lockscreen_custom_app_toggle_title">Skrót do aplikacji</string>
+    <string name="pref_lockscreen_custom_app_toggle_summary">Pokazuje dodatkowy suwak w przypadku stylu suwaka lub ikonę w przypadku stylu obrotowego</string>
+    <string name="pref_lockscreen_custom_app_activity_title">Własna aplikacja</string>
     <string name="pref_lockscreen_style_title">Styl ekranu blokady</string>
     <string name="pref_lockscreen_style_summary">Wybierz styl ekranu blokady</string>
 

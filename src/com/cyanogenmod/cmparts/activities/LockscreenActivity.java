@@ -30,21 +30,24 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
     private static final String BUTTON_CATEGORY = "pref_category_button_settings";
     private static final String LOCKSCREEN_STYLE_PREF = "pref_lockscreen_style";
     private static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "lockscreen_quick_unlock_control";
-    private static final String LOCKSCREEN_PHONE_MESSAGING_TAB = "lockscreen_phone_messaging_tab";
+    private static final String LOCKSCREEN_CUSTOM_APP_TOGGLE = "pref_lockscreen_custom_app_toggle";
+    private static final String LOCKSCREEN_CUSTOM_APP_ACTIVITY = "pref_lockscreen_custom_app_activity";
     private static final String LOCKSCREEN_DISABLE_UNLOCK_TAB = "lockscreen_disable_unlock_tab";
     private static final String MESSAGING_TAB_APP = "pref_messaging_tab_app";
+    private static final String LOCKSCREEN_ALWAYS_BATTERY = "lockscreen_always_battery";
 
     private CheckBoxPreference mMusicControlPref;
     private CheckBoxPreference mAlwaysMusicControlPref;
     private CheckBoxPreference mTrackballUnlockPref;
     private CheckBoxPreference mMenuUnlockPref;
     private CheckBoxPreference mQuickUnlockScreenPref;
-    private CheckBoxPreference mPhoneMessagingTabPref;
+    private CheckBoxPreference mCustomAppTogglePref;
     private CheckBoxPreference mDisableUnlockTab;
+    private CheckBoxPreference mBatteryAlwaysOnPref;
 
     private ListPreference mLockscreenStylePref;
 
-    private Preference mMessagingTabApp;
+    private Preference mCustomAppActivityPref;
     private int mKeyNumber = 1;
 
     private static final int REQUEST_PICK_SHORTCUT = 1;
@@ -66,6 +69,11 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
         addPreferencesFromResource(R.xml.lockscreen_settings);
 
         PreferenceScreen prefSet = getPreferenceScreen();
+
+        /* Always display battery perceantage */
+        mBatteryAlwaysOnPref = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_ALWAYS_BATTERY);
+        mBatteryAlwaysOnPref.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.LOCKSCREEN_ALWAYS_BATTERY, 0) == 1);
                 
         /* Music Controls */
         mMusicControlPref = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_MUSIC_CONTROLS);
@@ -83,10 +91,11 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
         mQuickUnlockScreenPref.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, 0) == 1);
 
-        /* Lockscreen Phone Messaging Tab */
-        mPhoneMessagingTabPref = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_PHONE_MESSAGING_TAB);
-        mPhoneMessagingTabPref.setChecked(Settings.System.getInt(getContentResolver(),
-                Settings.System.LOCKSCREEN_PHONE_MESSAGING_TAB, 0) == 1);
+        /* Lockscreen Custom App Toggle */
+        mCustomAppTogglePref = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_CUSTOM_APP_TOGGLE);
+        mCustomAppTogglePref.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.LOCKSCREEN_CUSTOM_APP_TOGGLE, 0) == 1);
+
 
         /* Lockscreen Style */
         mLockscreenStylePref = (ListPreference) prefSet.findPreference(LOCKSCREEN_STYLE_PREF);
@@ -94,12 +103,6 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
                 Settings.System.LOCKSCREEN_STYLE_PREF, 1);
         mLockscreenStylePref.setValue(String.valueOf(lockscreenStyle));
         mLockscreenStylePref.setOnPreferenceChangeListener(this);
-        if (!isDefaultLockscreenStyle()) {
-            mPhoneMessagingTabPref.setEnabled(false);
-            mPhoneMessagingTabPref.setChecked(false);
-        } else {
-            mPhoneMessagingTabPref.setEnabled(true);
-        }
 
         /* Trackball Unlock */
         mTrackballUnlockPref = (CheckBoxPreference) prefSet.findPreference(TRACKBALL_UNLOCK_PREF);
@@ -127,7 +130,8 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
         if (!getResources().getBoolean(R.bool.has_trackball)) {
             buttonCategory.removePreference(mTrackballUnlockPref);
         }
-        mMessagingTabApp = (Preference) prefSet.findPreference(MESSAGING_TAB_APP);
+
+        mCustomAppActivityPref = (Preference) prefSet.findPreference(LOCKSCREEN_CUSTOM_APP_ACTIVITY);
         
         /* Screen Lock */
         mScreenLockTimeoutDelayPref = (ListPreference) prefSet
@@ -150,8 +154,9 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
     public void onResume() {
         super.onResume();
 
-        mMessagingTabApp.setSummary(Settings.System.getString(getContentResolver(),
-                Settings.System.LOCKSCREEN_MESSAGING_TAB_APP));
+        mCustomAppActivityPref.setSummary(Settings.System.getString(getContentResolver(),
+                Settings.System.LOCKSCREEN_CUSTOM_APP_ACTIVITY));
+
         if (!doesUnlockAbilityExist()) {
             mDisableUnlockTab.setEnabled(false);
             mDisableUnlockTab.setChecked(false);
@@ -160,18 +165,15 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
         } else {
             mDisableUnlockTab.setEnabled(true);
         }
-
-        if (!isDefaultLockscreenStyle()) {
-            mPhoneMessagingTabPref.setEnabled(false);
-            mPhoneMessagingTabPref.setChecked(false);
-        } else {
-            mPhoneMessagingTabPref.setEnabled(true);
-        }
     }
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         boolean value;
-        if (preference == mMusicControlPref) {
+        if (preference == mBatteryAlwaysOnPref) {
+            value = mBatteryAlwaysOnPref.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.LOCKSCREEN_ALWAYS_BATTERY, value ? 1 : 0);
+        } else if (preference == mMusicControlPref) {
             value = mMusicControlPref.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.LOCKSCREEN_MUSIC_CONTROLS, value ? 1 : 0);
@@ -186,10 +188,10 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
             Settings.System.putInt(getContentResolver(),
                     Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, value ? 1 : 0);
             return true;
-        } else if (preference == mPhoneMessagingTabPref) {
-            value = mPhoneMessagingTabPref.isChecked();
+        } else if (preference == mCustomAppTogglePref) {
+            value = mCustomAppTogglePref.isChecked();
             Settings.System.putInt(getContentResolver(),
-                    Settings.System.LOCKSCREEN_PHONE_MESSAGING_TAB, value ? 1 : 0);
+                    Settings.System.LOCKSCREEN_CUSTOM_APP_TOGGLE, value ? 1 : 0);
             return true;
         } else if (preference == mTrackballUnlockPref) {
             value = mTrackballUnlockPref.isChecked();
@@ -205,7 +207,7 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
             value = mDisableUnlockTab.isChecked();
             Settings.Secure.putInt(getContentResolver(),
                     Settings.Secure.LOCKSCREEN_GESTURES_DISABLE_UNLOCK, value ? 1 : 0);
-        } else if (preference == mMessagingTabApp) {
+        } else if (preference == mCustomAppActivityPref) {
             pickShortcut(4);
         }
         return false;
@@ -216,12 +218,6 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
             int lockscreenStyle = Integer.valueOf((String) newValue);
             Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_STYLE_PREF,
                     lockscreenStyle);
-            if (!isDefaultLockscreenStyle()) {
-                mPhoneMessagingTabPref.setEnabled(false);
-                mPhoneMessagingTabPref.setChecked(false);
-            } else {
-                mPhoneMessagingTabPref.setEnabled(true);
-            }
             return true;
         } else if (preference == mScreenLockTimeoutDelayPref) {
             int timeoutDelay = Integer.valueOf((String) newValue);
@@ -289,8 +285,8 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
         Intent intent = data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT);
         int keyNumber = mKeyNumber;
         if (keyNumber == 4){
-            if (Settings.System.putString(getContentResolver(), Settings.System.LOCKSCREEN_MESSAGING_TAB_APP, intent.toUri(0))) {
-                mMessagingTabApp.setSummary(intent.toUri(0));
+            if (Settings.System.putString(getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_APP_ACTIVITY, intent.toUri(0))) {
+                mCustomAppActivityPref.setSummary(intent.toUri(0));
             }
         }
     }
@@ -298,8 +294,8 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
     void completeSetCustomApp(Intent data) {
         int keyNumber = mKeyNumber;
         if (keyNumber == 4){
-            if (Settings.System.putString(getContentResolver(), Settings.System.LOCKSCREEN_MESSAGING_TAB_APP, data.toUri(0))) {
-                mMessagingTabApp.setSummary(data.toUri(0));
+            if (Settings.System.putString(getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_APP_ACTIVITY, data.toUri(0))) {
+                mCustomAppActivityPref.setSummary(data.toUri(0));
             }
         }
     }

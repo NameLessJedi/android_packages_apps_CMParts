@@ -228,9 +228,9 @@
     <string name="pref_menu_unlock_summary">Sblocca il telefono premendo il tasto menu</string>
     <string name="pref_lockscreen_quick_unlock_control_title">Sblocco veloce</string>
     <string name="pref_lockscreen_quick_unlock_control_summary">Non è richiesto premere OK dopo aver inserito il PIN o la Password. Cancellare conta come tentativo fallito.</string>
-    <string name="pref_lockscreen_phone_messaging_control_title">Telefono e Messaggi</string>
-    <string name="pref_lockscreen_phone_messaging_control_summary">Applicazioni Telefono e Messaggi accessibili dal lockscreen.</string>
-    <string name="pref_messaging_tab_app_title">Applicazione messaggi</string>
+    <string name="pref_lockscreen_custom_app_toggle_title">Lanciatore app personalizzato</string>
+    <string name="pref_lockscreen_custom_app_toggle_summary">Visualizza un secondo tab nel lockscreen a tab scorrevoli, visualizza l\'icona di un\'app personalizzata nel lockscreen rotante, aggiunge un terzo anello nel lockscreen ad anelli.</string>
+    <string name="pref_lockscreen_custom_app_activity_title">Applicazione personalizzata</string>
     <string name="pref_lockscreen_style_title">Stile lockscreen</string>
     <string name="pref_lockscreen_style_summary">Scegli lo stile del lockscreen</string>
 

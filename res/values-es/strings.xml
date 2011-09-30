@@ -190,9 +190,9 @@
     <string name="pref_menu_unlock_summary">Pulsar el boton menú desbloquea el dispositivo</string>
     <string name="pref_lockscreen_quick_unlock_control_title">Desbloqueo rápido</string>
     <string name="pref_lockscreen_quick_unlock_control_summary">No es necesario pulsar OK al introducir PIN o Contraseña. Borra contador de intentos.</string>
-    <string name="pref_lockscreen_phone_messaging_control_title">Teléfono y Mensajes</string>
-    <string name="pref_lockscreen_phone_messaging_control_summary">Teléfono y Mensajes accesible desde el protector de pantalla.</string>
-    <string name="pref_messaging_tab_app_title">Aplicación de mensajería</string>
+    <string name="pref_lockscreen_custom_app_toggle_title">Lanzador de aplicaciones personalizadas</string>
+    <string name="pref_lockscreen_custom_app_toggle_summary">Muestra un estilo de desplazamiento, muestra una onda al estilo de rotación en la aplicación personalizada </string>
+    <string name="pref_lockscreen_custom_app_activity_title">Aplicación personalizada</string>
 
 
     <!-- Long Press Home -->

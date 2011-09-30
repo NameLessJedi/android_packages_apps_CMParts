@@ -24,6 +24,9 @@
     <string name="pref_lockscreen_screenoff_lock_delay">屏幕手动关闭时的延迟</string>
     <string name="pref_lockscreen_timeout_lock_delay_summary">当屏幕超时自动休眠时，延迟多长时间后启用锁屏</string>
     <string name="pref_lockscreen_screenoff_lock_delay_summary">当手动关闭屏幕时，延迟多长时间后启用锁屏</string>
+    <string name="pref_lockscreen_custom_app_toggle_title">自定义程序启动</string>
+    <string name="pref_lockscreen_custom_app_toggle_summary">在滑动风格时显示第二个滑动条，在旋转风格时显示自定义程序按键</string>
+    <string name="pref_lockscreen_custom_app_activity_title">自定义程序</string>
 
     <!-- Color Picker -->
     <string name="title_color_picker">选择颜色</string>
