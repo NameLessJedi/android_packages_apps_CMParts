@@ -34,9 +34,6 @@
     <string name="ui_title">ユーザインタフェース</string>
     <string name="ui_summary">ユーザインタフェース設定と調整</string>
 
-    <string name="pref_electron_beam_animation_on">スクリーンオンアニメ</string>
-    <string name="pref_electron_beam_animation_off">スクリーンオフアニメ</string>
-
     <!-- User interface : 180 degree rotation -->
     <string name="pref_rotate_180_title">180度回転</string>
     <string name="pref_rotate_180_summary">自動回転が有効な場合に180度の回転を追加する</string>

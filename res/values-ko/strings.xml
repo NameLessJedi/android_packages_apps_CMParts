@@ -494,9 +494,6 @@
     <string name="pref_lockscreen_disable_unlock_tab_summary">안내: 트랙볼이나 메뉴 키, 손동작 잠금 해제 중 하나 이상을 활성화해야 이 옵션을 사용할 수 있습니다.</string>
     <string name="gestures_explain_create_screen">수행할 동작(또는 잠금 해제나 소리)를 선택한 후 화면에 손동작을 그리십시오.</string>
 
-    <string name="pref_electron_beam_animation_on">화면 켜기 애니메이션 사용</string>
-    <string name="pref_electron_beam_animation_off">화면 끄기 애니메이션 사용</string>
-
     <!-- Change Log strings -->
     <string name="changelog_title">변경 내역 보기</string>
     <string name="changelog_dialog">변경 내역</string>
