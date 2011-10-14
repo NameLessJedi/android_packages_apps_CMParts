@@ -1,9 +1,11 @@
 package com.cyanogenmod.cmparts.activities;
 
-import com.cyanogenmod.cmparts.R;
-
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
+import android.content.ActivityNotFoundException;
 import android.gesture.GestureLibraries;
 import android.gesture.GestureLibrary;
 import android.os.Build;
@@ -18,10 +20,14 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
+import com.cyanogenmod.cmparts.R;
+import com.cyanogenmod.cmparts.utils.ShortcutPickHelper;
+
 import java.io.File;
 import java.util.ArrayList;
 
-public class LockscreenActivity extends PreferenceActivity implements OnPreferenceChangeListener {
+public class LockscreenActivity extends PreferenceActivity implements
+        OnPreferenceChangeListener, ShortcutPickHelper.OnPickListener {
 
     private static final String LOCKSCREEN_MUSIC_CONTROLS = "lockscreen_music_controls";
     private static final String LOCKSCREEN_ALWAYS_MUSIC_CONTROLS = "lockscreen_always_music_controls";
@@ -33,7 +39,6 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
     private static final String LOCKSCREEN_CUSTOM_APP_TOGGLE = "pref_lockscreen_custom_app_toggle";
     private static final String LOCKSCREEN_CUSTOM_APP_ACTIVITY = "pref_lockscreen_custom_app_activity";
     private static final String LOCKSCREEN_DISABLE_UNLOCK_TAB = "lockscreen_disable_unlock_tab";
-    private static final String MESSAGING_TAB_APP = "pref_messaging_tab_app";
     private static final String LOCKSCREEN_ALWAYS_BATTERY = "lockscreen_always_battery";
 
     private CheckBoxPreference mMusicControlPref;
@@ -46,20 +51,21 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
     private CheckBoxPreference mBatteryAlwaysOnPref;
 
     private ListPreference mLockscreenStylePref;
+    private ShortcutPickHelper mPicker;
 
     private Preference mCustomAppActivityPref;
-    private int mKeyNumber = 1;
 
-    private static final int REQUEST_PICK_SHORTCUT = 1;
-    private static final int REQUEST_PICK_APPLICATION = 2;
-    private static final int REQUEST_CREATE_SHORTCUT = 3;
-    
     /* Screen Lock */
     private static final String LOCKSCREEN_TIMEOUT_DELAY_PREF = "pref_lockscreen_timeout_delay";
     private static final String LOCKSCREEN_SCREENOFF_DELAY_PREF = "pref_lockscreen_screenoff_delay";
 
     private ListPreference mScreenLockTimeoutDelayPref;
     private ListPreference mScreenLockScreenOffDelayPref;
+
+    private int mLockscreenStyle;
+
+    private int mMaxRingCustomApps = Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES.length;
+    private int mWhichApp = -1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,6 +76,8 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
 
         PreferenceScreen prefSet = getPreferenceScreen();
 
+        mLockscreenStyle = Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_STYLE_PREF, 1);
+
         /* Always display battery perceantage */
         mBatteryAlwaysOnPref = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_ALWAYS_BATTERY);
         mBatteryAlwaysOnPref.setChecked(Settings.System.getInt(getContentResolver(),
@@ -78,7 +86,7 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
         /* Music Controls */
         mMusicControlPref = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_MUSIC_CONTROLS);
         mMusicControlPref.setChecked(Settings.System.getInt(getContentResolver(), 
-                Settings.System.LOCKSCREEN_MUSIC_CONTROLS, 1) == 1);
+                Settings.System.LOCKSCREEN_MUSIC_CONTROLS, 0) == 1);
 
         /* Always Display Music Controls */
         mAlwaysMusicControlPref = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_ALWAYS_MUSIC_CONTROLS);
@@ -99,9 +107,7 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
 
         /* Lockscreen Style */
         mLockscreenStylePref = (ListPreference) prefSet.findPreference(LOCKSCREEN_STYLE_PREF);
-        int lockscreenStyle = Settings.System.getInt(getContentResolver(),
-                Settings.System.LOCKSCREEN_STYLE_PREF, 1);
-        mLockscreenStylePref.setValue(String.valueOf(lockscreenStyle));
+        mLockscreenStylePref.setValue(String.valueOf(mLockscreenStyle));
         mLockscreenStylePref.setOnPreferenceChangeListener(this);
 
         /* Trackball Unlock */
@@ -147,15 +153,20 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
                 Settings.System.SCREEN_LOCK_SCREENOFF_DELAY, 0);
         mScreenLockScreenOffDelayPref.setValue(String.valueOf(screenOffDelay));
         mScreenLockScreenOffDelayPref.setOnPreferenceChangeListener(this);
-
+        mPicker = new ShortcutPickHelper(this, this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        mCustomAppActivityPref.setSummary(Settings.System.getString(getContentResolver(),
-                Settings.System.LOCKSCREEN_CUSTOM_APP_ACTIVITY));
+        if (mLockscreenStyle == 5) {
+            mCustomAppActivityPref.setSummary(getCustomRingAppSummary());
+        } else {
+            String value = Settings.System.getString(getContentResolver(),
+                    Settings.System.LOCKSCREEN_CUSTOM_APP_ACTIVITY);
+            mCustomAppActivityPref.setSummary(mPicker.getFriendlyNameForUri(value));
+        }
 
         if (!doesUnlockAbilityExist()) {
             mDisableUnlockTab.setEnabled(false);
@@ -165,6 +176,11 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
         } else {
             mDisableUnlockTab.setEnabled(true);
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        mPicker.onActivityResult(requestCode, resultCode, data);
     }
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
@@ -208,7 +224,82 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
             Settings.Secure.putInt(getContentResolver(),
                     Settings.Secure.LOCKSCREEN_GESTURES_DISABLE_UNLOCK, value ? 1 : 0);
         } else if (preference == mCustomAppActivityPref) {
-            pickShortcut(4);
+            if (mLockscreenStyle == 5) {
+                final String[] items = getCustomRingAppItems();
+
+                if (items.length == 0) {
+                    mWhichApp = 0;
+                    mPicker.pickShortcut();
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle(R.string.pref_lockscreen_ring_custom_apps_dialog_title_set);
+                    builder.setItems(items, new Dialog.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            mWhichApp = which;
+                            mPicker.pickShortcut();
+                        }
+                    });
+                    if (items.length < mMaxRingCustomApps) {
+                        builder.setPositiveButton(R.string.pref_lockscreen_ring_custom_apps_dialog_add,
+                                new Dialog.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                mWhichApp = items.length;
+                                mPicker.pickShortcut();
+                            }
+                        });
+                    }
+                    builder.setNeutralButton(R.string.pref_lockscreen_ring_custom_apps_dialog_remove,
+                            new Dialog.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(LockscreenActivity.this);
+                            builder.setTitle(R.string.pref_lockscreen_ring_custom_apps_dialog_title_unset);
+                            builder.setItems(items, new Dialog.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    Settings.System.putString(getContentResolver(),
+                                        Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[which], null);
+                                    for (int q = which + 1; q < mMaxRingCustomApps; q++) {
+                                        Settings.System.putString(getContentResolver(),
+                                            Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[q - 1],
+                                            Settings.System.getString(getContentResolver(),
+                                                Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[q]));
+                                        Settings.System.putString(getContentResolver(),
+                                            Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[q], null);
+                                    }
+                                    mCustomAppActivityPref.setSummary(getCustomRingAppSummary());
+                                }
+                            });
+                            builder.setNegativeButton(R.string.pref_lockscreen_ring_custom_apps_dialog_cancel,
+                                    new Dialog.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            builder.setCancelable(true);
+                            builder.create().show();
+                        }
+                    });
+                    builder.setNegativeButton(R.string.pref_lockscreen_ring_custom_apps_dialog_cancel,
+                            new Dialog.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.setCancelable(true);
+                    builder.create().show();
+                }
+            } else {
+                mPicker.pickShortcut();
+            }
         }
         return false;
     }
@@ -233,70 +324,18 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
         return false;
     }
 
-    private void pickShortcut(int keyNumber) {
-        mKeyNumber = keyNumber;
-        Bundle bundle = new Bundle();
-        ArrayList<String> shortcutNames = new ArrayList<String>();
-        shortcutNames.add(getString(R.string.group_applications));
-        bundle.putStringArrayList(Intent.EXTRA_SHORTCUT_NAME, shortcutNames);
-        ArrayList<ShortcutIconResource> shortcutIcons = new ArrayList<ShortcutIconResource>();
-        shortcutIcons.add(ShortcutIconResource.fromContext(this, R.drawable.ic_launcher_application));
-        bundle.putParcelableArrayList(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, shortcutIcons);
-        Intent pickIntent = new Intent(Intent.ACTION_PICK_ACTIVITY);
-        pickIntent.putExtra(Intent.EXTRA_INTENT, new Intent(Intent.ACTION_CREATE_SHORTCUT));
-        pickIntent.putExtra(Intent.EXTRA_TITLE, getText(R.string.select_custom_app_title));
-        pickIntent.putExtras(bundle);
-        startActivityForResult(pickIntent, REQUEST_PICK_SHORTCUT);
-    }
-
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case REQUEST_PICK_APPLICATION:
-                    completeSetCustomApp(data);
-                    break;
-                case REQUEST_CREATE_SHORTCUT:
-                    completeSetCustomShortcut(data);
-                    break;
-                case REQUEST_PICK_SHORTCUT:
-                    processShortcut(data, REQUEST_PICK_APPLICATION, REQUEST_CREATE_SHORTCUT);
-                    break;
+    public void shortcutPicked(String uri, String friendlyName, boolean isApplication) {
+        if (mWhichApp == -1) {
+            if (Settings.System.putString(getContentResolver(),
+                    Settings.System.LOCKSCREEN_CUSTOM_APP_ACTIVITY, uri)) {
+                mCustomAppActivityPref.setSummary(friendlyName);
             }
-        }
-    }
-
-    void processShortcut(Intent intent, int requestCodeApplication, int requestCodeShortcut) {
-        // Handle case where user selected "Applications"
-        String applicationName = getResources().getString(R.string.group_applications);
-        String shortcutName = intent.getStringExtra(Intent.EXTRA_SHORTCUT_NAME);
-        if (applicationName != null && applicationName.equals(shortcutName)) {
-            Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-            mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-            Intent pickIntent = new Intent(Intent.ACTION_PICK_ACTIVITY);
-            pickIntent.putExtra(Intent.EXTRA_INTENT, mainIntent);
-            startActivityForResult(pickIntent, requestCodeApplication);
         } else {
-            startActivityForResult(intent, requestCodeShortcut);
-        }
-    }
-
-    void completeSetCustomShortcut(Intent data) {
-        Intent intent = data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT);
-        int keyNumber = mKeyNumber;
-        if (keyNumber == 4){
-            if (Settings.System.putString(getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_APP_ACTIVITY, intent.toUri(0))) {
-                mCustomAppActivityPref.setSummary(intent.toUri(0));
-            }
-        }
-    }
-
-    void completeSetCustomApp(Intent data) {
-        int keyNumber = mKeyNumber;
-        if (keyNumber == 4){
-            if (Settings.System.putString(getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_APP_ACTIVITY, data.toUri(0))) {
-                mCustomAppActivityPref.setSummary(data.toUri(0));
-            }
+            Settings.System.putString(getContentResolver(),
+                    Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[mWhichApp], uri);
+            mCustomAppActivityPref.setSummary(getCustomRingAppSummary());
+            mWhichApp = -1;
         }
     }
 
@@ -331,5 +370,30 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
         } else {
             return false;
         }
+    }
+
+    private String getCustomRingAppSummary() {
+        String summary = "";
+        String[] items = getCustomRingAppItems();
+
+        for (int q = 0; q < items.length; q++) {
+            if (q != 0) {
+                summary += ", ";
+            }
+            summary += items[q];
+        }
+        return summary;
+    }
+
+    private String[] getCustomRingAppItems() {
+        ArrayList<String> items = new ArrayList<String>();
+        for (int q = 0; q < mMaxRingCustomApps; q++) {
+            String uri = Settings.System.getString(getContentResolver(),
+                         Settings.System.LOCKSCREEN_CUSTOM_RING_APP_ACTIVITIES[q]);
+            if (uri != null) {
+                items.add(mPicker.getFriendlyNameForUri(uri));
+            }
+        }
+       return items.toArray(new String[0]);
     }
 }

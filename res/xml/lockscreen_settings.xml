@@ -1,6 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <PreferenceCategory android:title="@string/general_title">
+
+        <ListPreference android:key="pref_lockscreen_style"
+            android:dialogTitle="@string/pref_lockscreen_style_title"
+            android:title="@string/pref_lockscreen_style_title"
+            android:summary="@string/pref_lockscreen_style_summary"
+            android:entries="@array/pref_lockscreen_style_entries"
+            android:entryValues="@array/pref_lockscreen_style_values" />
+
+        <CheckBoxPreference android:key="pref_lockscreen_custom_app_toggle"
+            android:title="@string/pref_lockscreen_custom_app_toggle_title"
+            android:summary="@string/pref_lockscreen_custom_app_toggle_summary" />
+
+        <Preference android:key="pref_lockscreen_custom_app_activity"
+            android:dependency="pref_lockscreen_custom_app_toggle"
+            android:title="@string/pref_lockscreen_custom_app_activity_title" />
+
+        <CheckBoxPreference android:key="lockscreen_always_battery"
+            android:title="@string/pref_lockscreen_always_battery_title"
+            android:summary="@string/pref_lockscreen_always_battery_summary" />
+
+        <CheckBoxPreference android:key="lockscreen_music_controls"
+            android:title="@string/pref_lockscreen_music_controls_title"
+            android:summary="@string/pref_lockscreen_music_controls_summary" />
+
+        <CheckBoxPreference android:key="lockscreen_always_music_controls"
+            android:dependency="lockscreen_music_controls"
+            android:title="@string/pref_lockscreen_always_music_controls_title"
+            android:summary="@string/pref_lockscreen_always_music_controls_summary" />
+
+        <CheckBoxPreference android:key="lockscreen_quick_unlock_control"
+            android:title="@string/pref_lockscreen_quick_unlock_control_title"
+            android:summary="@string/pref_lockscreen_quick_unlock_control_summary" />
+
+        <!-- screen timeout delay -->
+        <ListPreference android:key="pref_lockscreen_timeout_delay"
+            android:dialogTitle="@string/pref_lockscreen_delay_title"
+            android:title="@string/pref_lockscreen_timeout_lock_delay"
+            android:summary="@string/pref_lockscreen_timeout_lock_delay_summary"
+            android:entries="@array/pref_lockscreen_delay_entries"
+            android:entryValues="@array/pref_lockscreen_delay_values" />
+
+        <!-- screen off delay -->
+        <ListPreference android:key="pref_lockscreen_screenoff_delay"
+            android:dialogTitle="@string/pref_lockscreen_delay_title"
+            android:title="@string/pref_lockscreen_screenoff_lock_delay"
+            android:summary="@string/pref_lockscreen_screenoff_lock_delay_summary"
+            android:entries="@array/pref_lockscreen_delay_entries"
+            android:entryValues="@array/pref_lockscreen_delay_values" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="@string/buttons_title"
         android:key="pref_category_button_settings">
 
@@ -22,58 +74,6 @@
         <CheckBoxPreference android:key="lockscreen_disable_unlock_tab"
             android:title="@string/pref_lockscreen_disable_unlock_tab"
             android:summary="@string/pref_lockscreen_disable_unlock_tab_summary" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="@string/general_title">
-
-        <CheckBoxPreference android:key="lockscreen_always_battery"
-            android:title="@string/pref_lockscreen_always_battery_title"
-            android:summary="@string/pref_lockscreen_always_battery_summary" />
-
-        <CheckBoxPreference android:key="lockscreen_music_controls"
-            android:title="@string/pref_lockscreen_music_controls_title"
-            android:summary="@string/pref_lockscreen_music_controls_summary" />
-
-        <CheckBoxPreference android:key="lockscreen_always_music_controls"
-            android:dependency="lockscreen_music_controls"
-            android:title="@string/pref_lockscreen_always_music_controls_title"
-            android:summary="@string/pref_lockscreen_always_music_controls_summary" />
-
-        <CheckBoxPreference android:key="lockscreen_quick_unlock_control"
-            android:title="@string/pref_lockscreen_quick_unlock_control_title"
-            android:summary="@string/pref_lockscreen_quick_unlock_control_summary" />
-
-        <ListPreference android:key="pref_lockscreen_style"
-            android:dialogTitle="@string/pref_lockscreen_style_title"
-            android:title="@string/pref_lockscreen_style_title"
-            android:summary="@string/pref_lockscreen_style_summary"
-            android:entries="@array/pref_lockscreen_style_entries"
-            android:entryValues="@array/pref_lockscreen_style_values" />
-
-        <CheckBoxPreference android:key="pref_lockscreen_custom_app_toggle"
-            android:title="@string/pref_lockscreen_custom_app_toggle_title"
-            android:summary="@string/pref_lockscreen_custom_app_toggle_summary" />
-
-        <Preference android:key="pref_lockscreen_custom_app_activity"
-            android:dependency="pref_lockscreen_custom_app_toggle"
-            android:title="@string/pref_lockscreen_custom_app_activity_title" />
-
-        <!-- screen timeout delay -->
-        <ListPreference android:key="pref_lockscreen_timeout_delay"
-            android:dialogTitle="@string/pref_lockscreen_delay_title"
-            android:title="@string/pref_lockscreen_timeout_lock_delay"
-            android:summary="@string/pref_lockscreen_timeout_lock_delay_summary"
-            android:entries="@array/pref_lockscreen_delay_entries"
-            android:entryValues="@array/pref_lockscreen_delay_values" />
-
-        <!-- screen off delay -->
-        <ListPreference android:key="pref_lockscreen_screenoff_delay"
-            android:dialogTitle="@string/pref_lockscreen_delay_title"
-            android:title="@string/pref_lockscreen_screenoff_lock_delay"
-            android:summary="@string/pref_lockscreen_screenoff_lock_delay_summary"
-            android:entries="@array/pref_lockscreen_delay_entries"
-            android:entryValues="@array/pref_lockscreen_delay_values" />
 
     </PreferenceCategory>
 
